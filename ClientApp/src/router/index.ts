@@ -6,7 +6,9 @@ import LoginView from "../views/LoginView.vue";
 import QueryView from "../views/QueryView.vue";
 import SchoolView from "../views/SchoolView.vue";
 import MapView from "../views/MapView.vue";
-import CreatorView from "../views/CreatorView.vue";
+import RegisterView from "../views/RegisterView.vue"
+import ProfileView from "../views/ProfileView.vue"
+import CreatorView from "../views/ProfileView.vue"
 
 Vue.use(VueRouter)
 
@@ -20,6 +22,11 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "Login",
     component: LoginView
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: RegisterView
   },
   {
     path: "/search",
@@ -40,6 +47,11 @@ const routes: Array<RouteConfig> = [
     path: "/creator",
     name: "Creator",
     component: CreatorView
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: ProfileView
   }
 ]
 

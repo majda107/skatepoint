@@ -8,7 +8,7 @@ import SchoolView from "../views/SchoolView.vue";
 import MapView from "../views/MapView.vue";
 import RegisterView from "../views/RegisterView.vue"
 import ProfileView from "../views/ProfileView.vue"
-import CreatorView from "../views/ProfileView.vue"
+import CreatorView from "../views/CreatorView.vue"
 
 Vue.use(VueRouter)
 

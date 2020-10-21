@@ -1,3 +1,3 @@
 export const CONSTS = {
-    ENDPOINT: "http://localhost:5000"
+    ENDPOINT: "https://localhost:5001"
 }

@@ -17,7 +17,6 @@
         ></l-marker>
       </l-map>
     </div>
-
     <div class="selected" v-if="selected != undefined">
       <span>{{ selected.name }}</span> <br />
       <span>{{ selected.type }}</span> <br />

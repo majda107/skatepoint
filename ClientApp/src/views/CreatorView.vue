@@ -37,6 +37,7 @@ import { CONSTS } from "@/models/consts";
 import { SkatePointModel } from "../models/skate-point-model";
 import { KnownPlaceModel } from "../models/known-place-model";
 import { mapGetters } from "vuex";
+import router from "@/router";
 
 export default Vue.extend({
   name: "CreatorView",
@@ -56,15 +57,24 @@ export default Vue.extend({
 
   methods: {
     upload: async function () {
-      const res = await axios.post(`${CONSTS.ENDPOINT}/skate/addpoint`, {
-        name: this.name,
-        lat: this.lat,
-        lng: this.lng,
-        description: this.description,
-        type: this.type,
-      } as SkatePointModel);
+      const res = await axios.post(
+        `${CONSTS.ENDPOINT}/skate/addpoint`,
+        {
+          name: this.name,
+          lat: this.lat,
+          lng: this.lng,
+          description: this.description,
+          type: this.type,
+        } as SkatePointModel,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getToken}`,
+          },
+        }
+      );
 
       console.log(res.data);
+      this.$router.push("/map");
     },
     setMarker: async function (latlng: any) {
       console.log(latlng);
@@ -73,12 +83,7 @@ export default Vue.extend({
     },
     debounce: async function () {
       const res = await axios.get(
-        `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.getToken}`,
-          },
-        }
+        `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`
       );
 
       const places: KnownPlaceModel[] = res.data as KnownPlaceModel[];

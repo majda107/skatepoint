@@ -11,9 +11,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 using skolu_nepobiram.Database;
 using skolu_nepobiram.Database.Models;
 
@@ -113,6 +116,13 @@ namespace skolu_nepobiram
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                RequestPath = new PathString("/images")
+            });
 
             app.UseRouting();
 

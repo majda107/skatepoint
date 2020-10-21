@@ -1,10 +1,8 @@
 <template>
   <div class="main-wrapper">
     <div class="main-title">
-      <h2>Vyhledání školy</h2>
-      <button class="btn-s btn-primary" style="margin-left: 24px">
-        Filtry
-      </button>
+        <h2>Vyhledání školy</h2>
+        <button class="btn-s btn-primary" style="margin-left: 24px; height: min-content;">Filtry</button>
     </div>
     <div class="search">
       <input

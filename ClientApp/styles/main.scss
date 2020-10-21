@@ -27,6 +27,10 @@
     }
 }
 
+input:focus, textarea:focus, button:focus, select:focus{
+    outline: none;
+}
+
 body{
     font-family: 'Poppins', sans-serif;
     margin: 0;

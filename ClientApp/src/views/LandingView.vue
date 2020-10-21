@@ -35,35 +35,4 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import "../../styles/variables/variables.scss";
-h1 {
-  text-align: center;
-}
-.landing {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  .landing-upper {
-    height: 350px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    // background-image: url('https://imgur.com/8Qbi89e.jpg');
-    background-color: #c4c4c4;
-    width: 100vw;
-    h1 {
-      margin-bottom: 30px;
-    }
-  }
-  .landing-lower {
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    h2 {
-      margin-bottom: 10px;
-    }
-  }
-}
 </style>

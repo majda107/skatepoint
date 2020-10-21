@@ -8,7 +8,10 @@
           </router-link>
         </div>
       </div>
-      <div class="nav-content-menu">
+      <div
+        class="nav-content-menu"
+        v-bind:class="{ isMobileOpened: isMobileOpened }"
+      >
         <ul class="nav-content-menu-items">
           <router-link to="/map" class="nav-content-menu-items-item">
             <li class="nav-content-menu-items-item">Mapa</li>
@@ -45,6 +48,13 @@
             </router-link>
           </template>
         </ul>
+        <div class="hamburger-container">
+          <div class="hamburger" v-on:click="() => ToggleMobile()">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -55,11 +65,20 @@ import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 export default Vue.extend({
   name: "Navbar",
+  data: function () {
+    return {
+      isMobileOpened: false,
+    };
+  },
   computed: {
     ...mapGetters(["getLoggedIn", "getUsername"]),
   },
   methods: {
     ...mapActions(["setEmpty"]),
+    ToggleMobile: function () {
+      this.isMobileOpened = !this.isMobileOpened;
+      console.log(this.isMobileOpened);
+    },
     logout: async function () {
       this.setEmpty();
     },

@@ -3,20 +3,26 @@
     <div class="nav-content main-wrapper">
       <div class="nav-content-title">
         <div class="nav-content-title-logo">
-          <a href="#"><h1>Školu Nepobírám</h1></a>
+          <router-link to="/">
+            <h1>Školu Nepobírám</h1>
+          </router-link>
         </div>
       </div>
       <div class="nav-content-menu">
         <ul class="nav-content-menu-items">
-          <li class="nav-content-menu-items-item">
-            <a href="#how-it-works">Hledat školu</a>
-          </li>
-          <li class="nav-content-menu-items-item">
-            <a href="#">Aktuální opatření</a>
-          </li>
-          <li class="nav-content-menu-items-item btn-s btn-primary">
-            Přihlášení školy
-          </li>
+          <router-link to="/search">
+            <li class="nav-content-menu-items-item">Hledat školu</li>
+          </router-link>
+
+          <router-link to="/">
+            <li class="nav-content-menu-items-item">Aktuální opatření</li>
+          </router-link>
+
+          <router-link to="/login">
+            <li class="nav-content-menu-items-item btn-s btn-primary">
+              Přihlášení školy
+            </li>
+          </router-link>
         </ul>
       </div>
     </div>

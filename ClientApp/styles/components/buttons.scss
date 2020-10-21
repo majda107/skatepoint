@@ -1,0 +1,51 @@
+.btn-s{
+    padding: 6px 20px;
+    font-size: 1rem;
+    font-weight: 300rem;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btn-l{
+    padding: 14px 48px;
+    font-weight: 500;
+    font-size: 1.125rem;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.btn-m{
+    border: none;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+.width-100p{
+    width: 100%;
+}
+button{
+    font-family: 'Poppins', sans-serif;
+}
+.btn-primary{
+    color: $secondary-color;
+    background-color: $primary-color;
+    transition: background-color 0.2s;
+    &:hover{
+        background-color: $primary-color-hover !important;
+    }
+}
+.btn-secondary{
+    color: $primary-color;
+    background-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 0px 2px $primary-color;
+    transition: background-color 0.2s, color 0.2s;
+    &:hover{
+        color: $secondary-color;
+        background-color: $primary-color !important;
+    }
+}

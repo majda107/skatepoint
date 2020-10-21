@@ -1,4 +1,4 @@
-# skolu-nepobiram-client
+# skolu-nepobiram-ts
 
 ## Project setup
 ```

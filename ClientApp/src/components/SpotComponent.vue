@@ -1,9 +1,6 @@
 <template>
   <div class="card">
-    <img
-      src="https://scontent-prg1-1.xx.fbcdn.net/v/t1.0-9/84401281_1090915061243813_1250138544618340352_n.jpg?_nc_cat=101&ccb=2&_nc_sid=e3f864&_nc_ohc=UMEKEVmYe9kAX9p0a0L&_nc_ht=scontent-prg1-1.xx&oh=a3a318e945c137d959cff4f257049188&oe=5FB6D6EB"
-      alt="Card image"
-    />
+    <img :src="getImageUrl(point)" />
     <div class="card-content">
       <h3>{{ point.name }}</h3>
       <span class="mt-8">{{ point.type }}</span>
@@ -14,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import { CONSTS } from "@/models/consts";
 import { SkatePointModel } from "@/models/skate-point-model";
 import Vue from "vue";
 export default Vue.extend({
@@ -27,6 +25,9 @@ export default Vue.extend({
   methods: {
     remove: function () {
       this.$emit("remove");
+    },
+    getImageUrl: function (p: SkatePointModel) {
+      return CONSTS.ENDPOINT + "/images/" + p.image;
     },
   },
 });

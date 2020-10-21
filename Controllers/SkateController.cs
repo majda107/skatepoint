@@ -60,6 +60,7 @@ namespace skolu_nepobiram.Controllers
             }
 
             point.Image = name;
+            await this._db.SaveChangesAsync();
 
             return new JsonResult(point);
         }

@@ -6,7 +6,11 @@
     <hr />
 
     <ul>
-      <li v-for="(school, i, k) in schools" :key="k">
+      <li
+        v-for="(school, i, k) in schools"
+        :key="k"
+        @click="navigateTo(school)"
+      >
         {{ school.fullName }}
       </li>
     </ul>
@@ -34,6 +38,9 @@ export default Vue.extend({
       );
 
       this.schools = res.data;
+    },
+    navigateTo: async function (school: SchoolModel) {
+      this.$router.push(`/school/${school.ico}`);
     },
   },
 });

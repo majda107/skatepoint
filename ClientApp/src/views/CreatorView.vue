@@ -12,6 +12,10 @@
         <input v-model="type" />
         <label>Description</label>
         <input v-model="description" />
+
+        <label>Image</label>
+        <input type="file" ref="fileInput" />
+
         <button type="button" @click="upload">Upload</button>
       </form>
       <div class="map">
@@ -57,7 +61,15 @@ export default Vue.extend({
 
   methods: {
     upload: async function () {
-      const res = await axios.post(
+      const fileInput = this.$refs.fileInput as HTMLInputElement;
+      const file = fileInput?.files?.item(0) ?? null;
+
+      if (file == null) {
+        console.log("Invalid file count!");
+        return;
+      }
+
+      let res = await axios.post(
         `${CONSTS.ENDPOINT}/skate/addpoint`,
         {
           name: this.name,
@@ -74,6 +86,17 @@ export default Vue.extend({
       );
 
       console.log(res.data);
+
+      const form = new FormData();
+      form.append("files", file);
+      form.append("id", res.data.id);
+
+      res = await axios.put(`${CONSTS.ENDPOINT}/skate/putpointimage`, form, {
+        headers: {
+          Authorization: `Bearer ${this.getToken}`,
+        },
+      });
+
       this.$router.push("/map");
     },
     setMarker: async function (latlng: any) {

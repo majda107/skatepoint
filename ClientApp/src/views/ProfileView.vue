@@ -77,7 +77,7 @@ export default Vue.extend({
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
 }
 </style>

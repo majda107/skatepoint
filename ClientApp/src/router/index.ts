@@ -5,6 +5,7 @@ import LandingView from "../views/LandingView.vue";
 import LoginView from "../views/LoginView.vue";
 import QueryView from "../views/QueryView.vue";
 import SchoolView from "../views/SchoolView.vue";
+import MapView from "../views/MapView.vue";
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes: Array<RouteConfig> = [
     path: "/school/:ico",
     name: "School",
     component: SchoolView
+  },
+  {
+    path: "/map",
+    name: "Map",
+    component: MapView
   }
 ]
 

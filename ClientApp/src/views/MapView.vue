@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="main-wrapper">
+    <div class="main-title">
+        <h2>Mapa spotů</h2>
+    </div>
     <div class="map" ref="map">
       <!-- <l-map :zoom="zoom" :center="center" @click="addMarker"> -->
       <l-map :zoom="zoom" :center="center">
@@ -14,7 +17,6 @@
         ></l-marker>
       </l-map>
     </div>
-
     <div class="selected" v-if="selected != undefined">
       <span>{{ selected.name }}</span> <br />
       <span>{{ selected.type }}</span> <br />
@@ -93,6 +95,6 @@ export default Vue.extend({
 
 .map {
   width: 100%;
-  height: 500px;
+  height: 420px;
 }
 </style>

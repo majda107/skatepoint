@@ -16,6 +16,25 @@
     margin: auto;
 }
 
+.main-title{
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    padding: 48px 0 32px;
+    h2{
+        font-size: 28px;
+        font-weight: 500;
+    }
+}
+
 body{
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+@media screen and (max-width: 1264px){
+    .main-wrapper{
+        width: auto;
+        margin: 0 32px;
+    }
 }

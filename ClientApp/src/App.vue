@@ -59,7 +59,9 @@ body {
   align-items: center;
   flex-flow: column;
 }
-
+.view{
+    padding-top: 72px;
+}
 #nav {
   padding: 30px;
 

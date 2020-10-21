@@ -20,9 +20,22 @@ h3 {
 .mt-24{
     margin-top: 24px;
 }
+.mt-8{
+    margin-top: 8px;
+}
+.medium{
+    font-weight: 500;
+}
+span{
+    font-size: 1rem;
+}
+p{
+    font-size: 1rem;
+}
 h1, h2, h3, h4, span, p{
     color: $text-color;
     margin: 0;
+    text-align: left;
 }
 .text-grey{
     color: $grey-text;

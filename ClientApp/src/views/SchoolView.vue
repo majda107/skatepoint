@@ -9,6 +9,18 @@
           <h2>Koronavirus statistiky v okresu Náchod</h2>
           <div class="statistics-data">
             <span class="simple">69</span>
+            <div>
+              <span>Nakažení</span>
+              <span class="warning">2457</span>
+            </div>
+            <div>
+              <span>Vyléčení</span>
+              <span class="success">2457</span>
+            </div>
+            <div>
+              <span>Úmrtí</span>
+              <span class="alert">2457</span>
+            </div>
           </div>
         </div>
 
@@ -44,8 +56,12 @@
           <h2>Informace o škole</h2>
           <ul>
             <li><a>Webové stránky školy</a></li>
-            <li><span>Vedení: Ing. Jan Lang</span></li>
-            <li><span>IČO: 123456789</span></li>
+            <li>
+              <span>Vedení: {{ schoolInfections.school.principalName }}</span>
+            </li>
+            <li>
+              <span>IČO: {{ schoolInfections.school.ico }}</span>
+            </li>
           </ul>
 
           <h3>Adresa</h3>
@@ -169,8 +185,22 @@ p {
     flex-flow: row;
     margin-top: 18px;
 
+    & > div {
+      display: flex;
+      flex-flow: column;
+
+      & > span {
+        font-size: 1.25rem;
+        font-weight: 500;
+      }
+    }
+
     & > .simple {
       font-size: 2.25rem;
+    }
+
+    & > * {
+      margin-right: 22px;
     }
   }
 }

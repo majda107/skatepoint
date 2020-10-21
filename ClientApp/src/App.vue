@@ -5,16 +5,19 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Navbar />
-    <router-view />
+    <router-view class="main"/>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 export default {
   name: "App",
   components: {
     Navbar,
+    Footer
   },
 };
 </script>>
@@ -24,6 +27,14 @@ export default {
 
 * {
   font-family: "Poppins", sans-serif;
+}
+.main{
+  margin-top: $nav-height;
+  min-height: calc(100vh - #{$nav_height} - #{$footer-height} );
+}
+body{
+  padding: 0;
+  margin: 0;
 }
 
 #app {

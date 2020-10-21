@@ -6,6 +6,7 @@ import LoginView from "../views/LoginView.vue";
 import QueryView from "../views/QueryView.vue";
 import SchoolView from "../views/SchoolView.vue";
 import MapView from "../views/MapView.vue";
+import CreatorView from "../views/CreatorView.vue";
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes: Array<RouteConfig> = [
     path: "/map",
     name: "Map",
     component: MapView
+  },
+  {
+    path: "/creator",
+    name: "Creator",
+    component: CreatorView
   }
 ]
 

@@ -26,6 +26,12 @@ namespace skolu_nepobiram.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetPoints()
+        {
+            return new JsonResult(this._db.SkatePlaces);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetKnownPlaces([FromQuery] string name)
         {
             if (!ModelState.IsValid) return BadRequest();

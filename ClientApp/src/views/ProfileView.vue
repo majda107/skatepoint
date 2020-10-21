@@ -5,6 +5,9 @@
         </div>
         <div class="cards">
             <SpotComponent/>
+            <SpotComponent/>
+            <SpotComponent/>
+            <SpotComponent/>
         </div>
     </div>
 </template>
@@ -22,12 +25,19 @@ export default {
 
 <style lang="scss">
 
+@import "../../styles/main.scss";
+
 .cards{
     display: flex;
-    flex-flow: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
+}
+
+@media screen and (max-width: $mobile-width){
+    .cards{
+        justify-content: flex-start;
+    }
 }
 
 </style>

@@ -17,11 +17,23 @@
         ></l-marker>
       </l-map>
     </div>
-    <div class="selected" v-if="selected != undefined">
-      <span>{{ selected.name }}</span> <br />
-      <span>{{ selected.type }}</span> <br />
-      <span>{{ selected.description }}</span> <br />
-      <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
+    <div class="split mt-32" v-if="selected != undefined">
+        <div class="split-left">
+            <h3>{{ selected.name }}</h3>
+            <h4 class="medium mt-16">Typ</h4>
+            <p class="mt-4">{{ selected.type }}</p>
+            <h4 class="mt-16">Popisek</h4>
+            <p class="mt-4">{{ selected.description }}</p>
+            <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
+            <div class="inline-f mt-24">
+                <h4>Hodnocení</h4>
+                <button class="btn-s btn-primary" style="margin-left: 24px;">To se mi líbí</button>
+            </div>
+            <p class="mt-8 t-primary medium" style="font-size: 20px;">24 likes</p>
+        </div>
+        <div class="split-right">
+            <img class="mt-48" src="https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg" >
+        </div>
     </div>
   </div>
 </template>
@@ -92,9 +104,38 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import "~leaflet/dist/leaflet.css";
+@import "../../styles/main.scss";
 
 .map {
   width: 100%;
   height: 420px;
+}
+.split{
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    &-left{
+        flex: 1;
+    }
+    &-right{
+        flex: 1;
+        text-align: end;
+        padding: 0 0 0 64px;
+        img{
+            
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-width){
+    .split{
+        flex-flow: column;
+        &-right{
+            padding: 0;
+        }
+    }
 }
 </style>

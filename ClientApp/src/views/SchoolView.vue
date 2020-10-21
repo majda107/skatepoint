@@ -1,7 +1,58 @@
 <template>
   <div>
-    <div v-if="fetched && schoolInfections != undefined">
-      <div v-html="schoolInfections.notice"></div>
+    <div v-if="fetched && schoolInfections != undefined" class="school">
+      <h1>{{ schoolInfections.school.fullName }}</h1>
+      <span class="alert">Velka mira nakazenych</span>
+
+      <div class="statistics-wrapper">
+        <div class="statistics">
+          <h2>Koronavirus statistiky v okresu Náchod</h2>
+          <div class="statistics-data">
+            <span class="simple">69</span>
+          </div>
+        </div>
+
+        <div class="statistics">
+          <h2>Počet nakažených ve škole</h2>
+          <div class="statistics-data">
+            <span class="simple">69</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Výhláška pro okres Hradec Králové</h2>
+      <div class="notice" v-html="schoolInfections.notice"></div>
+
+      <h2>Výhláška ředitele školy</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu posuere
+        dolor. Donec mi eros, dignissim volutpat sodales vel, tempus vitae eros.
+        Integer volutpat auctor lacus, a ornare mi iaculis sit amet. Donec vel
+        diam ullamcorper, pharetra felis sit amet, fringilla enim. Duis maximus
+        orci nisl. Class aptent taciti sociosqu ad litora torquent per conubia
+        nostra, per inceptos himenaeos. Integer cursus, lacus vel pharetra
+        faucibus, orci ligula facilisis ante, non imperdiet velit diam id leo.
+        Mauris sed luctus elit, a posuere est. Etiam sodales libero ac
+        ullamcorper vehicula. Maecenas sollicitudin sollicitudin odio non
+        aliquet. Orci varius natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Maecenas sit amet lobortis quam. Sed feugiat at
+        dolor a fermentum. Cras eget tortor in mi imperdiet sollicitudin.
+      </p>
+
+      <div class="contact">
+        <div class="contact-address">
+          <h2>Informace o škole</h2>
+          <ul>
+            <li><a>Webové stránky školy</a></li>
+            <li><span>Vedení: Ing. Jan Lang</span></li>
+            <li><span>IČO: 123456789</span></li>
+          </ul>
+
+          <h3>Adresa</h3>
+          <p>{{ schoolInfections.school.address }}</p>
+        </div>
+        <div class="contact-map"></div>
+      </div>
     </div>
     <div v-else>
       <span>Loading...</span>
@@ -36,3 +87,91 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+// @import "../../styles/variables/variables.scss";
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 600px;
+  grid-template-rows: auto;
+
+  &-address {
+    & > ul {
+      margin-top: 10px;
+    }
+
+    & > h3 {
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &-map {
+    background-color: gray;
+    width: 600px;
+    height: 340px;
+  }
+}
+
+.school {
+  & > * {
+    margin-top: 28px;
+  }
+
+  * {
+    text-align: left;
+  }
+}
+
+.notice {
+  font-size: 0.9rem;
+  max-height: 260px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+p {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.statistics-wrapper {
+  display: flex;
+  flex-flow: row;
+  margin-top: 40px;
+
+  & > * {
+    margin-right: 32px;
+  }
+}
+
+.statistics {
+  background-color: #1d1d1d;
+  padding: 16px 26px;
+  border-radius: 8px;
+
+  display: flex;
+  flex-flow: column;
+  width: fit-content;
+
+  & > h2 {
+    font-size: 1.375rem;
+  }
+
+  * {
+    // color: $secondary-color;
+    color: white;
+  }
+
+  &-data {
+    display: flex;
+    flex-flow: row;
+    margin-top: 18px;
+
+    & > .simple {
+      font-size: 2.25rem;
+    }
+  }
+}
+</style>

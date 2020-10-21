@@ -5,7 +5,10 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Navbar />
-    <router-view />
+
+    <div class="app-view">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -24,6 +27,8 @@ export default {
 
 * {
   font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 #app {
@@ -32,6 +37,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.app-view {
+  margin-top: 80px;
 }
 
 #nav {

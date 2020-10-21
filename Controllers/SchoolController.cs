@@ -49,7 +49,8 @@ namespace skolu_nepobiram.Controllers
 
         private string parseNotice(string province)
         {
-            var node = this._notices.DocumentNode.SelectSingleNode("//div[contains(@id,'dalsi-informace-CZ0100')]");
+            var node = this._notices.DocumentNode.SelectSingleNode(
+                $"//div[contains(@id,'dalsi-informace-{province}')]");
             return node?.OuterHtml ?? "";
         }
 

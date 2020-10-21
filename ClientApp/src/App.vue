@@ -5,7 +5,11 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Navbar />
-    <router-view class="main"/>
+
+    <div class="main">
+      <router-view />
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -17,7 +21,7 @@ export default {
   name: "App",
   components: {
     Navbar,
-    Footer
+    Footer,
   },
 };
 </script>>
@@ -27,12 +31,19 @@ export default {
 
 * {
   font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
 }
-.main{
+.main {
   margin-top: $nav-height;
-  min-height: calc(100vh - #{$nav_height} - #{$footer-height} );
+  min-height: calc(100vh - #{$nav_height} - #{$footer-height} - #{$nav-height});
+  max-width: 1200px;
+  padding: 0 20px;
+  width: 100%;
+
+  margin-bottom: $nav-height;
 }
-body{
+body {
   padding: 0;
   margin: 0;
 }
@@ -43,6 +54,10 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  display: flex;
+  align-items: center;
+  flex-flow: column;
 }
 .view{
     padding-top: 72px;

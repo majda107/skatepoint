@@ -2,6 +2,12 @@ h2{
     font-weight: 500;
     font-size: 1.75rem;
 }
+
+h3 {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
 .mt-32{
     margin-top: 32px;
 }
@@ -45,4 +51,15 @@ h1, h2, h3, h4, span, p{
 }
 .white{
     color: $secondary-color;
+}
+
+a {
+    color: $alert-color;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }

@@ -62,7 +62,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import "~leaflet/dist/leaflet.css";
 
 .map {

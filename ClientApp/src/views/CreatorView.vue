@@ -1,22 +1,27 @@
 <template>
   <div class="creator">
-    <form>
-      <label>Name</label>
-      <input v-model="name" v-debounce:500ms="debounce" />
-      <ul>
-        <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
-      </ul>
+    <template v-if="getLoggedIn">
+      <form>
+        <label>Name</label>
+        <input v-model="name" v-debounce:500ms="debounce" />
+        <ul>
+          <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
+        </ul>
 
-      <label>Type</label>
-      <input v-model="type" />
-      <label>Description</label>
-      <input v-model="description" />
-      <button type="button" @click="upload">Upload</button>
-    </form>
-    <div class="map">
-      <map-component v-on:marker="setMarker"></map-component>
-      <span>lat: {{ lat }} lng: {{ lng }}</span>
-    </div>
+        <label>Type</label>
+        <input v-model="type" />
+        <label>Description</label>
+        <input v-model="description" />
+        <button type="button" @click="upload">Upload</button>
+      </form>
+      <div class="map">
+        <map-component v-on:marker="setMarker"></map-component>
+        <span>lat: {{ lat }} lng: {{ lng }}</span>
+      </div>
+    </template>
+    <template v-else>
+      <span>... please login</span>
+    </template>
   </div>
 </template>
 
@@ -31,6 +36,7 @@ import axios from "axios";
 import { CONSTS } from "@/models/consts";
 import { SkatePointModel } from "../models/skate-point-model";
 import { KnownPlaceModel } from "../models/known-place-model";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "CreatorView",
@@ -67,12 +73,28 @@ export default Vue.extend({
     },
     debounce: async function () {
       const res = await axios.get(
-        `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`
+        `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getToken}`,
+          },
+        }
       );
 
       const places: KnownPlaceModel[] = res.data as KnownPlaceModel[];
       this.places = places;
     },
+  },
+
+  created: async function () {
+    if (!this.getLoggedIn) {
+      this.$router.push("/login");
+      return;
+    }
+  },
+
+  computed: {
+    ...mapGetters(["getLoggedIn", "getToken"]),
   },
 });
 </script>

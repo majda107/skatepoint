@@ -17,7 +17,7 @@
             <li class="nav-content-menu-items-item">Mapa</li>
           </router-link>
 
-          <router-link to="/add">
+          <router-link to="/creator">
             <li class="nav-content-menu-items-item">Přidat spot</li>
           </router-link>
 

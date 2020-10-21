@@ -4,5 +4,6 @@ export interface SkatePointModel {
     lat: number,
     lng: number,
     description: string,
-    type: string
+    type: string,
+    image: string
 }

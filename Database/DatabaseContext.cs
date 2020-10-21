@@ -10,6 +10,9 @@ namespace skolu_nepobiram.Database
         public DbSet<SchoolModel> Schools { get; set; }
         public DbSet<CovidInfection> ProvinceInfections { get; set; }
 
+        public DbSet<SkatePlace> SkatePlaces { get; set; }
+        public DbSet<KnownPlace> KnownPlaces { get; set; }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> o) : base(o)
         {
         }

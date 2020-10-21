@@ -30,6 +30,10 @@
 button{
     font-family: 'Poppins', sans-serif;
 }
+button:disabled {
+    opacity: 0.4;
+}
+
 .btn-primary{
     color: $secondary-color;
     background-color: $primary-color;

@@ -136,5 +136,39 @@ namespace skolu_nepobiram.Controllers
 
             return new OkResult();
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> LoadTreesCSV()
+        {
+            using (FileStream fs = new FileStream("stromy.csv", FileMode.Open))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                sr.ReadLine(); // first line is pointless (SCHEMA)
+                var line = sr.ReadLine();
+                while (line != null)
+                {
+                    var split = line.Split(",");
+
+                    if (split.Length >= 1)
+                    {
+                        var entry = new KnownPlace()
+                        {
+                            Name = split[1],
+                            Location = split?[5] ?? "",
+                            Type = "Tree"
+                        };
+
+                        this._db.KnownPlaces.Add(entry);
+                    }
+
+
+                    line = sr.ReadLine();
+                }
+
+                await this._db.SaveChangesAsync();
+                return Ok();
+            }
+        }
     }
 }

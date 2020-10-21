@@ -1,8 +1,13 @@
 <template>
   <div class="main-wrapper">
     <div class="main-title">
-        <h2>Vyhledání školy</h2>
-        <button class="btn-s btn-primary" style="margin-left: 24px; height: min-content;">Filtry</button>
+      <h2>Vyhledání školy</h2>
+      <button
+        class="btn-s btn-primary"
+        style="margin-left: 24px; height: min-content"
+      >
+        Filtry
+      </button>
     </div>
     <div class="search">
       <input
@@ -15,10 +20,13 @@
         class="btn-l btn-secondary"
         style="margin-left: 16px"
         @click="search()"
+        :disabled="searching"
       >
-        Search
+        Hledej
       </button>
     </div>
+
+    <Loader v-show="searching" />
 
     <div class="results">
       <div
@@ -51,25 +59,34 @@ import { CONSTS } from "@/models/consts";
 import { SchoolModel } from "../models/school-model";
 
 import SchoolPreview from "../components/SchoolPreview.vue";
+import Loader from "../components/Loader.vue";
 
 export default Vue.extend({
   data: function () {
     return {
       query: "",
+      searching: false,
       schools: [] as SchoolModel[],
     };
   },
   components: {
     SchoolPreview,
+    Loader,
   },
 
   methods: {
     search: async function () {
-      const res = await axios.get(
-        `${CONSTS.ENDPOINT}/school/searchico?name=${this.query}`
-      );
+      this.searching = true;
+      try {
+        const res = await axios.get(
+          `${CONSTS.ENDPOINT}/school/searchico?name=${this.query}`
+        );
 
-      this.schools = res.data;
+        this.schools = res.data;
+      } catch (e) {
+        console.log(e);
+      }
+      this.searching = false;
     },
     navigateTo: async function (school: SchoolModel) {
       this.$router.push(`/school/${school.ico}`);

@@ -179,9 +179,9 @@ export default Vue.extend({
     font-size: 0.9rem;
     font-weight: normal;
   }
-  
+
   ::v-deep hr {
-      display: none;
+    display: none;
   }
 }
 

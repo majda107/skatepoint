@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,39 @@ namespace skolu_nepobiram.Controllers
         public async Task<IActionResult> Test([FromBody] string text)
         {
             return Json(text);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> LoadCovidCSV()
+        {
+            using (FileStream fs = new FileStream("nakazeni.csv", FileMode.Open))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                sr.ReadLine(); // first line is pointless (SCHEMA)
+                var line = sr.ReadLine();
+                while (line != null)
+                {
+                    var split = line.Split(",");
+
+                    var entry = new CovidInfection()
+                    {
+                        Date = DateTime.Parse(split?[0] ?? ""),
+                        Province = split?[1] ?? "",
+                        ProvinceLau = split?[2] ?? "",
+                        Infected = int.Parse(split?[3] ?? "0"),
+                        Recovered = int.Parse(split?[4] ?? "0"),
+                        Died = int.Parse(split?[5] ?? "0")
+                    };
+
+                    this._db.ProvinceInfections.Add(entry);
+
+                    line = sr.ReadLine();
+                }
+
+                await this._db.SaveChangesAsync();
+                return Ok();
+            }
         }
 
         [HttpPost]

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using skolu_nepobiram.Database;
 
 namespace skolu_nepobiram.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20201021101220_Covid infections")]
+    partial class Covidinfections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,16 +224,13 @@ namespace skolu_nepobiram.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Died")
                         .HasColumnType("int");
 
                     b.Property<int>("Infected")
                         .HasColumnType("int");
 
-                    b.Property<string>("Province")
+                    b.Property<string>("Povince")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProvinceLau")

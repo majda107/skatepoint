@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace skolu_nepobiram.Database.Models
@@ -6,7 +7,9 @@ namespace skolu_nepobiram.Database.Models
     {
         [Key] public int Id { get; set; }
 
-        public string Povince { get; set; }
+        public DateTime Date { get; set; }
+
+        public string Province { get; set; }
         public string ProvinceLau { get; set; }
 
         public int Infected { get; set; }

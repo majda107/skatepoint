@@ -94,6 +94,7 @@
     }
   }
   .nav {
+    z-index: 10000000000000000000000000;
     &-content {
       &-menu {
         &-items {
@@ -108,13 +109,11 @@
             // width: 100vw;
             position: absolute;
             margin-top: $nav-height;
-            height: calc(100vh - #{$footer-height} - #{$nav-height});
+            height: calc(100vh - #{$nav-height});
             width: 100vw;
             background-color: #c4c4c4;
             a {
               margin-left: 0;
-              &:hover {
-              }
             }
           }
         }

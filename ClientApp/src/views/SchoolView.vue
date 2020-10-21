@@ -2,7 +2,19 @@
   <div>
     <div v-if="fetched && schoolInfections != undefined" class="school">
       <h1>{{ schoolInfections.school.fullName }}</h1>
-      <span class="alert">Velka mira nakazenych</span>
+
+      <span
+        v-if="schoolInfections.level == 'high'"
+        style="display: block"
+        class="alert"
+        >Vysoký počet nakažených</span
+      >
+      <span
+        v-if="schoolInfections.level == 'low'"
+        style="display: block"
+        class="success"
+        >Nízký počet nakažených</span
+      >
 
       <div class="statistics-wrapper">
         <div class="statistics" v-if="infection">
@@ -11,7 +23,11 @@
             {{ schoolInfections.school.province }}
           </h2>
           <div class="statistics-data">
-            <img src="@/assets/sad.svg" />
+            <img
+              v-if="schoolInfections.level == 'high'"
+              src="@/assets/sad.svg"
+            />
+            <img v-else src="@/assets/happy.svg" />
             <div>
               <span>Nakažení</span>
               <span class="warning">{{ infection.infected }}</span>

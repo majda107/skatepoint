@@ -4,5 +4,6 @@ import { SchoolModel } from './school-model';
 export interface SchoolInfectionModel {
     school: SchoolModel
     notice: string,
-    infections: ProvinceInfectionModel[]
+    infections: ProvinceInfectionModel[],
+    level: "low" | "high"
 }

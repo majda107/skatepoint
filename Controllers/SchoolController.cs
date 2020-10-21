@@ -36,13 +36,17 @@ namespace skolu_nepobiram.Controllers
             var school = this._db.Schools.FirstOrDefault(s => s.ICO == ico);
             if (school == null) return NotFound();
 
-            var infections = this._db.ProvinceInfections.Where(i => i.ProvinceLau == school.Province);
+            var infections = this._db.ProvinceInfections.Where(i => i.ProvinceLau == school.Province).ToArray();
+            var level = infections.Length > 0
+                ? infections.Last().Infected >= 100 ? InfectionLevel.High : InfectionLevel.Low
+                : InfectionLevel.Low;
 
             return new JsonResult(new SchoolInfectionModel()
             {
                 School = school,
-                Infections = infections.ToArray(),
-                Notice = this.parseNotice(school.Province)
+                Infections = infections,
+                Notice = this.parseNotice(school.Province),
+                Level = level.ToString().ToLower()
             });
         }
 

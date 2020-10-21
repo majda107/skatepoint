@@ -16,7 +16,10 @@
     </div>
 
     <div class="selected" v-if="selected != undefined">
-      <span>{{ selected.name }}</span>
+      <span>{{ selected.name }}</span> <br />
+      <span>{{ selected.type }}</span> <br />
+      <span>{{ selected.description }}</span> <br />
+      <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
     </div>
   </div>
 </template>

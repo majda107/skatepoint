@@ -2,14 +2,14 @@
   <nav class="main-wrapper">
     <router-link class="nav-primary" to="/">Školu nepobírám</router-link>
     <div class="nav-secondary">
-      <router-link to="/hledat" class="btn-s btn-primary"
+      <router-link to="/search" class="btn-s btn-primary"
         >Hledat školu</router-link
       >
       <router-link to="/hledat" class="btn-s btn-primary">Mapa</router-link>
       <router-link to="/hledat" class="btn-s btn-primary"
         >Aktuální opatření</router-link
       >
-      <router-link to="/hledat" class="btn-s btn-secondary"
+      <router-link to="/login" class="btn-s btn-secondary"
         >Přihlášení školy</router-link
       >
     </div>
@@ -34,7 +34,7 @@ nav {
   }
   .nav-secondary {
     display: inline-block;
-    a{
+    a {
       margin-right: 10px;
     }
     position: relative;

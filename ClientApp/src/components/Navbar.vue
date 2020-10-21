@@ -3,7 +3,7 @@
     <div class="nav-content main-wrapper">
       <div class="nav-content-title">
         <div class="nav-content-title-logo">
-          <a href="#"><h1>Školu Nepobírám</h1></a>
+          <a href="#" style="text-decoration: none;"><h1>Školu Nepobírám</h1></a>
         </div>
       </div>
       <div class="nav-content-menu">
@@ -47,4 +47,5 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 @import "../../styles/main.scss";
+
 </style>

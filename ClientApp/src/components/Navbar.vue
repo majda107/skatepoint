@@ -1,20 +1,26 @@
 <template>
-<section class="nav">
-            <div class="nav-content main-wrapper">
-                <div class="nav-content-title">
-                    <div class="nav-content-title-logo">
-                        <a href="#"><h1>Školu Nepobírám</h1></a>
-                    </div>
-                </div>
-                <div class="nav-content-menu">
-                    <ul class="nav-content-menu-items">
-                        <li class="nav-content-menu-items-item"><a href="#how-it-works">Hledat školu</a></li>
-                        <li class="nav-content-menu-items-item"><a href="#">Aktuální opatření</a></li>
-                        <li class="nav-content-menu-items-item btn-s btn-primary">Přihlášení školy</li>
-                    </ul>
-                </div>
-            </div>
-</section>
+  <section class="nav">
+    <div class="nav-content main-wrapper">
+      <div class="nav-content-title">
+        <div class="nav-content-title-logo">
+          <a href="#"><h1>Školu Nepobírám</h1></a>
+        </div>
+      </div>
+      <div class="nav-content-menu">
+        <ul class="nav-content-menu-items">
+          <li class="nav-content-menu-items-item">
+            <a href="#how-it-works">Hledat školu</a>
+          </li>
+          <li class="nav-content-menu-items-item">
+            <a href="#">Aktuální opatření</a>
+          </li>
+          <li class="nav-content-menu-items-item btn-s btn-primary">
+            Přihlášení školy
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
   <!-- <nav class="main-wrapper">
     <router-link class="nav-primary" to="/">Školu nepobírám</router-link>
     <div class="nav-secondary">
@@ -40,23 +46,5 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-@import "../../styles/main.scss"
-// nav {
-//   height: 72px;
-//   .nav-primary {
-//     margin-right: 400px;
-//     position: relative;
-//     top: 50%;
-//     transform: translateY(-50%);
-//   }
-//   .nav-secondary {
-//     display: inline-block;
-//     a{
-//       margin-right: 10px;
-//     }
-//     position: relative;
-//     top: 50%;
-//     transform: translateY(-50%);
-//   }
-// }
+@import "../../styles/main.scss";
 </style>

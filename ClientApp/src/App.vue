@@ -5,7 +5,9 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Navbar />
-    <router-view />
+    <section class="view">
+        <router-view />
+    </section>
   </div>
 </template>
 
@@ -33,7 +35,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
+.view{
+    padding-top: 72px;
+}
 #nav {
   padding: 30px;
 

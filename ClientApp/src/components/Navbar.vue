@@ -10,7 +10,7 @@
       </div>
       <div class="nav-content-menu">
         <ul class="nav-content-menu-items">
-          <router-link to="/search">
+          <router-link to="/search" class="nav-content-menu-items-item">
             <li class="nav-content-menu-items-item">Hledat školu</li>
           </router-link>
 

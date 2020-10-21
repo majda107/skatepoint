@@ -22,6 +22,7 @@
                 a{
                     display: flex;
                     align-items: center;
+                    text-decoration: none !important;
                     h1{
                         font-size: 24px;
                         font-weight: 400;
@@ -41,19 +42,17 @@
                 display: flex;
                 flex-flow: row;
                 align-items: center;
-                &-item{
+                a {
                     margin-left: 24px;
                     display: block;
                     height: min-content;
-                    a{
-                        font-size: 1rem;
-                        font-weight: 400 !important;
-                        color: $text-color;
-                        text-decoration: none !important;
-                        transition: color 0.2s;
-                        &:hover{
-                            color: $primary-color;
-                        }
+                    text-decoration: none !important;
+                    font-size: 1rem;
+                    font-weight: 400 !important;
+                    color: $text-color;
+                    transition: color 0.2s;
+                    &:hover{
+                        color: $primary-color;
                     }
                 }
             }

@@ -38,9 +38,7 @@ export default {
   margin-top: $nav-height;
   min-height: calc(100vh - #{$nav_height} - #{$footer-height} - #{$nav-height});
   max-width: 1200px;
-  padding: 0 20px;
   width: 100%;
-
   margin-bottom: $nav-height;
 }
 body {
@@ -49,11 +47,6 @@ body {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 
   display: flex;
   align-items: center;

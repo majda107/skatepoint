@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using skolu_nepobiram.Database;
 
 namespace skolu_nepobiram
 {
@@ -24,6 +26,11 @@ namespace skolu_nepobiram
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddDbContext<DatabaseContext>(o =>
+            {
+                o.UseSqlServer("Server=192.168.75.150;Database=SkoluNepobiram;User Id=sa;Password=Hackathon1234.;");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +57,9 @@ namespace skolu_nepobiram
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

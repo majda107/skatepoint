@@ -2,7 +2,11 @@
   <div class="creator">
     <form>
       <label>Name</label>
-      <input v-model="name" />
+      <input v-model="name" v-debounce:500ms="debounce" />
+      <ul>
+        <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
+      </ul>
+
       <label>Type</label>
       <input v-model="type" />
       <label>Description</label>
@@ -18,10 +22,15 @@
 
 <script lang="ts">
 import Vue from "vue";
+
+import vueDebounce from "vue-debounce";
+Vue.use(vueDebounce);
+
 import MapComponent from "../components/MapComponent.vue";
 import axios from "axios";
 import { CONSTS } from "@/models/consts";
 import { SkatePointModel } from "../models/skate-point-model";
+import { KnownPlaceModel } from "../models/known-place-model";
 
 export default Vue.extend({
   name: "CreatorView",
@@ -35,6 +44,7 @@ export default Vue.extend({
       description: "",
       lat: 0,
       lng: 0,
+      places: [] as KnownPlaceModel[],
     };
   },
 
@@ -54,6 +64,14 @@ export default Vue.extend({
       console.log(latlng);
       this.lat = latlng.lat;
       this.lng = latlng.lng;
+    },
+    debounce: async function () {
+      const res = await axios.get(
+        `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`
+      );
+
+      const places: KnownPlaceModel[] = res.data as KnownPlaceModel[];
+      this.places = places;
     },
   },
 });

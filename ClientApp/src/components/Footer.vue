@@ -1,5 +1,5 @@
 <template>
-  <div>this is landing page</div>
+  <section class="footer">Hackathon 2020. Tým Nepobírám.</section>
 </template>
 
 <script lang="ts">
@@ -8,3 +8,7 @@ export default Vue.extend({
   name: "Footer",
 });
 </script>
+
+<style scoped lang="scss">
+@import "../../styles/main.scss";
+</style>

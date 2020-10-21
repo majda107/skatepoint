@@ -69,8 +69,5 @@ export default Vue.extend({
     input{
         width: 100% !important;
     }
-    button{
-
-    }
 }
 </style>

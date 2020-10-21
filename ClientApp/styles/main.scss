@@ -9,6 +9,7 @@
 
 @import "layout/login.scss";
 @import "layout/navigation.scss";
+@import "layout/footer.scss";
 
 .main-wrapper{
     max-width: 1200px;
@@ -19,7 +20,7 @@
     display: flex;
     flex-flow: row;
     width: 100%;
-    margin: 48px 0 32px;
+    padding: 48px 0 32px;
     h2{
         font-size: 28px;
         font-weight: 500;

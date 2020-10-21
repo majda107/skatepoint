@@ -1,7 +1,7 @@
 .nav{
     width: 100%;
     background-color: $secondary-color;
-    height: 72px;
+    height: $nav-height;
     position: fixed;
     top: 0;
     z-index: 1000;

@@ -8,7 +8,7 @@
           </router-link>
         </div>
       </div>
-      <div class="nav-content-menu">
+      <div class="nav-content-menu" v-bind:class="{ isMobileOpened: isMobileOpened }">
         <ul class="nav-content-menu-items">
           <router-link to="/search" class="nav-content-menu-items-item">
             <li class="nav-content-menu-items-item">Mapa</li>
@@ -33,6 +33,13 @@
             </li>
           </router-link>
         </ul>
+        <div class="hamburger-container">
+          <div class="hamburger" v-on:click="()=>ToggleMobile()">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -57,6 +64,17 @@
 import Vue from "vue";
 export default Vue.extend({
   name: "Navbar",
+  data: function () {
+    return {
+      isMobileOpened: false,
+    };
+  },
+  methods: {
+    ToggleMobile: function () {
+      this.isMobileOpened = !this.isMobileOpened;
+      console.log(this.isMobileOpened)
+    },
+  },
 });
 </script>
 

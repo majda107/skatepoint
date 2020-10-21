@@ -7,6 +7,9 @@ namespace skolu_nepobiram.Database.Models
         [Key] public string ICO { get; set; }
 
         public string FullName { get; set; }
+        public string PrincipalName { get; set; }
+
+        public string Address { get; set; }
 
         public string Email { get; set; }
 

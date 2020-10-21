@@ -58,6 +58,16 @@ namespace skolu_nepobiram.Controllers
             }
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CleanSchool()
+        {
+            this._db.Schools.RemoveRange(this._db.Schools);
+            await this._db.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpPost]
         [RequestSizeLimit(500000000)] // 500 MB LIMIT
         // public async Task<IActionResult> LoadXML(IFormFileCollection files)
@@ -100,6 +110,12 @@ namespace skolu_nepobiram.Controllers
                     var ico = school?["ICO"]?.InnerText;
                     if (ico == null) continue;
 
+                    // address fetch
+                    var address = school?["Reditelstvi"]?["RedAdresa1"];
+                    if (address == null) address = school?["Reditelstvi"]?["Reditel"]?["ReditelAdresa1"];
+                    if (address == null)
+                        address = school?["SkolyaZarizeni"]?["SkolaMistaVykonuCinnosti"].FirstChild?["MistoAdresa1"];
+
                     var entity = new SchoolModel()
                     {
                         ICO = ico,
@@ -107,7 +123,9 @@ namespace skolu_nepobiram.Controllers
                         Email = school?["Email1"]?.InnerText,
                         Capacity = school?["SkolyaZarizeni"]?["SKolaKapacita"]?.InnerText,
                         CapacityUnit = school?["SkolyaZarizeni"]?["SkolaKapacitaJednotka"]?.InnerText,
-                        Province = school?["Reditelstvi"]?["Okres"]?.InnerText
+                        Province = school?["Reditelstvi"]?["Okres"]?.InnerText,
+                        Address = address?.InnerText,
+                        PrincipalName = school?["Reditelstvi"]?["Reditel"]?["ReditelJmeno"]?.InnerText,
                     };
 
                     this._db.Schools.Add(entity);

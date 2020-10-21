@@ -5,21 +5,24 @@
       <span class="alert">Velka mira nakazenych</span>
 
       <div class="statistics-wrapper">
-        <div class="statistics">
-          <h2>Koronavirus statistiky v okresu Náchod</h2>
+        <div class="statistics" v-if="infection">
+          <h2>
+            Koronavirus statistiky v okresu
+            {{ schoolInfections.school.province }}
+          </h2>
           <div class="statistics-data">
             <span class="simple">69</span>
             <div>
               <span>Nakažení</span>
-              <span class="warning">2457</span>
+              <span class="warning">{{ infection.infected }}</span>
             </div>
             <div>
               <span>Vyléčení</span>
-              <span class="success">2457</span>
+              <span class="success">{{ infection.recovered }}</span>
             </div>
             <div>
               <span>Úmrtí</span>
-              <span class="alert">2457</span>
+              <span class="alert">{{ infection.died }}</span>
             </div>
           </div>
         </div>
@@ -32,7 +35,7 @@
         </div>
       </div>
 
-      <h2>Výhláška pro okres Hradec Králové</h2>
+      <h2>Výhláška pro okres {{ schoolInfections.school.province }}</h2>
       <div class="notice" v-html="schoolInfections.notice"></div>
 
       <h2>Výhláška ředitele školy</h2>
@@ -82,6 +85,7 @@ import { SchoolInfectionModel } from "../models/school-infection-model";
 import axios from "axios";
 import { CONSTS } from "@/models/consts";
 import { SchoolModel } from "@/models/school-model";
+import { ProvinceInfectionModel } from "@/models/province-infection-model";
 
 export default Vue.extend({
   name: "SchoolView",
@@ -89,6 +93,7 @@ export default Vue.extend({
     return {
       fetched: false,
       schoolInfections: undefined as SchoolInfectionModel | undefined,
+      infection: undefined as ProvinceInfectionModel | undefined,
     };
   },
 
@@ -99,6 +104,12 @@ export default Vue.extend({
     );
 
     this.schoolInfections = res.data;
+    if (this.schoolInfections && this.schoolInfections.infections.length > 0) {
+      this.infection = this.schoolInfections.infections[
+        this.schoolInfections.infections.length - 1
+      ];
+    }
+
     this.fetched = true;
   },
 });

@@ -29,16 +29,6 @@ const routes: Array<RouteConfig> = [
     component: RegisterView
   },
   {
-    path: "/search",
-    name: "Search",
-    component: QueryView
-  },
-  {
-    path: "/school/:ico",
-    name: "School",
-    component: SchoolView
-  },
-  {
     path: "/map",
     name: "Map",
     component: MapView

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="main-wrapper">
+    <div class="main-title">
+        <h2>Mapa spotů</h2>
+    </div>
     <div class="map" ref="map">
       <!-- <l-map :zoom="zoom" :center="center" @click="addMarker"> -->
       <l-map :zoom="zoom" :center="center">
@@ -93,6 +96,6 @@ export default Vue.extend({
 
 .map {
   width: 100%;
-  height: 500px;
+  height: 420px;
 }
 </style>

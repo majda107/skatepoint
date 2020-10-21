@@ -8,6 +8,7 @@ import SchoolView from "../views/SchoolView.vue";
 import MapView from "../views/MapView.vue";
 import RegisterView from "../views/RegisterView.vue"
 import ProfileView from "../views/ProfileView.vue"
+import CreatorView from "../views/CreatorView.vue"
 
 Vue.use(VueRouter)
 
@@ -23,9 +24,9 @@ const routes: Array<RouteConfig> = [
     component: LoginView
   },
   {
-      path: "/register",
-      name: "Register",
-      component: RegisterView
+    path: "/register",
+    name: "Register",
+    component: RegisterView
   },
   {
     path: "/search",
@@ -43,9 +44,14 @@ const routes: Array<RouteConfig> = [
     component: MapView
   },
   {
-      path: "/profile",
-      name: "Profile",
-      component: ProfileView
+    path: "/creator",
+    name: "Creator",
+    component: CreatorView
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: ProfileView
   }
 ]
 

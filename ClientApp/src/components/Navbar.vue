@@ -8,7 +8,10 @@
           </router-link>
         </div>
       </div>
-      <div class="nav-content-menu" v-bind:class="{ isMobileOpened: isMobileOpened }">
+      <div
+        class="nav-content-menu"
+        v-bind:class="{ isMobileOpened: isMobileOpened }"
+      >
         <ul class="nav-content-menu-items">
           <router-link to="/search" class="nav-content-menu-items-item">
             <li class="nav-content-menu-items-item">Mapa</li>
@@ -22,19 +25,31 @@
             <li class="nav-content-menu-items-item">Profil</li>
           </router-link>
 
-          <router-link to="/login">
-            <li class="nav-content-menu-items-item btn-s btn-secondary">
-              Přihlásit
+          <template v-if="getLoggedIn">
+            <li
+              class="nav-content-menu-items-item btn-s btn-primary"
+              style="margin-left: 24px"
+              @click="logout()"
+            >
+              Logout
             </li>
-          </router-link>
-          <router-link to="/register">
-            <li class="nav-content-menu-items-item btn-s btn-primary">
-              Registrovat
-            </li>
-          </router-link>
+          </template>
+
+          <template v-else>
+            <router-link to="/login" v-if="!getLoggedIn">
+              <li class="nav-content-menu-items-item btn-s btn-secondary">
+                Přihlásit
+              </li>
+            </router-link>
+            <router-link to="/register" v-if="!getLoggedIn">
+              <li class="nav-content-menu-items-item btn-s btn-primary">
+                Registrovat
+              </li>
+            </router-link>
+          </template>
         </ul>
         <div class="hamburger-container">
-          <div class="hamburger" v-on:click="()=>ToggleMobile()">
+          <div class="hamburger" v-on:click="() => ToggleMobile()">
             <div></div>
             <div></div>
             <div></div>
@@ -43,25 +58,11 @@
       </div>
     </div>
   </section>
-  <!-- <nav class="main-wrapper">
-    <router-link class="nav-primary" to="/">Školu nepobírám</router-link>
-    <div class="nav-secondary">
-      <router-link to="/search" class="btn-s btn-primary"
-        >Hledat školu</router-link
-      >
-      <router-link to="/hledat" class="btn-s btn-primary">Mapa</router-link>
-      <router-link to="/hledat" class="btn-s btn-primary"
-        >Aktuální opatření</router-link
-      >
-      <router-link to="/login" class="btn-s btn-secondary"
-        >Přihlášení školy</router-link
-      >
-    </div>
-  </nav> -->
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { mapActions, mapGetters } from "vuex";
 export default Vue.extend({
   name: "Navbar",
   data: function () {
@@ -69,10 +70,17 @@ export default Vue.extend({
       isMobileOpened: false,
     };
   },
+  computed: {
+    ...mapGetters(["getLoggedIn", "getUsername"]),
+  },
   methods: {
+    ...mapActions(["setEmpty"]),
     ToggleMobile: function () {
       this.isMobileOpened = !this.isMobileOpened;
-      console.log(this.isMobileOpened)
+      console.log(this.isMobileOpened);
+    },
+    logout: async function () {
+      this.setEmpty();
     },
   },
 });

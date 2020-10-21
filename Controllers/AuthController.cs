@@ -42,7 +42,8 @@ namespace skolu_nepobiram.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] UserModel user)
         {
-            var res = await this._um.CreateAsync(new ApplicationUser() {UserName = user.UserName}, user.Password);
+            var res = await this._um.CreateAsync(new ApplicationUser() {UserName = user.UserName, Email = user.Email},
+                user.Password);
             if (res.Succeeded)
             {
                 return new ObjectResult(new

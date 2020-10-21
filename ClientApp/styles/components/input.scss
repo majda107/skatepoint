@@ -1,0 +1,19 @@
+.search{
+    padding: 15px 32px;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: $text-color;
+    background-color: $primary-color;
+    border-radius: 8px;
+}
+input{
+    padding: 10px 16px;
+    font-weight: 400;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: $text-color;
+    border-radius: 8px;
+    background-color: $secondary-color;
+    @include input-border;
+    @include shadow-inset;
+}

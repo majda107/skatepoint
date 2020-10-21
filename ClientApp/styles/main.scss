@@ -1,6 +1,10 @@
 @import "variables/variables.scss";
 
+@import "mixins/mixins.scss";
+
 @import "components/buttons.scss";
+@import "components/input.scss";
+@import "components/text.scss";
 
 @import "layout/login.scss";
 @import "layout/navigation.scss";
@@ -8,4 +12,8 @@
 .main-wrapper{
     max-width: 1200px;
     margin: auto;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
 }

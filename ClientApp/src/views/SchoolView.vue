@@ -11,7 +11,7 @@
             {{ schoolInfections.school.province }}
           </h2>
           <div class="statistics-data">
-            <span class="simple">69</span>
+            <img src="@/assets/sad.svg" />
             <div>
               <span>Nakažení</span>
               <span class="warning">{{ infection.infected }}</span>
@@ -195,6 +195,10 @@ p {
     display: flex;
     flex-flow: row;
     margin-top: 18px;
+
+    & > img {
+      width: 64px;
+    }
 
     & > div {
       display: flex;

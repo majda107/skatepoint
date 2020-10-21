@@ -4,12 +4,17 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style lang="scss">
 @import "../styles/main.scss";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

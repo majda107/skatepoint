@@ -23,10 +23,10 @@ namespace skolu_nepobiram.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchICO([FromQuery] string name)
         {
-            var school = this._db.Schools.FirstOrDefault(s => s.FullName.ToLower().Contains(name.ToLower()));
-            if (school == null) return NotFound();
+            var schools = this._db.Schools.Where(s => s.FullName.ToLower().Contains(name.ToLower())).Take(10);
+            // if (school == null) return NotFound();
 
-            return Json(school);
+            return Json(schools.ToArray());
         }
 
 

@@ -27,7 +27,10 @@
               v-if="schoolInfections.level == 'high'"
               src="@/assets/sad.svg"
             />
-            <img v-else src="@/assets/happy.svg" />
+            <img
+              v-if="schoolInfections.level == 'low'"
+              src="@/assets/happy.svg"
+            />
             <div>
               <span>Nakažení</span>
               <span class="warning">{{ infection.infected }}</span>
@@ -168,10 +171,18 @@ export default Vue.extend({
 }
 
 .notice {
-  font-size: 0.9rem;
-  max-height: 260px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  //   max-height: 260px;
+  //   overflow-y: scroll;
+  //   overflow-x: hidden;
+  ::v-deep * {
+    color: gray;
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+  
+  ::v-deep hr {
+      display: none;
+  }
 }
 
 p {

@@ -39,7 +39,7 @@ namespace skolu_nepobiram.Controllers
             var infections = this._db.ProvinceInfections.Where(i => i.ProvinceLau == school.Province).ToArray();
             var level = infections.Length > 0
                 ? infections.Last().Infected >= 100 ? InfectionLevel.High : InfectionLevel.Low
-                : InfectionLevel.Low;
+                : InfectionLevel.None;
 
             return new JsonResult(new SchoolInfectionModel()
             {

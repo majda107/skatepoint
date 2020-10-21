@@ -5,5 +5,5 @@ export interface SchoolInfectionModel {
     school: SchoolModel
     notice: string,
     infections: ProvinceInfectionModel[],
-    level: "low" | "high"
+    level: "low" | "high" | "none"
 }

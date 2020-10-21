@@ -10,11 +10,11 @@
       </div>
       <div class="nav-content-menu">
         <ul class="nav-content-menu-items">
-          <router-link to="/search" class="nav-content-menu-items-item">
+          <router-link to="/map" class="nav-content-menu-items-item">
             <li class="nav-content-menu-items-item">Mapa</li>
           </router-link>
 
-          <router-link to="/add">
+          <router-link to="/create">
             <li class="nav-content-menu-items-item">Přidat spot</li>
           </router-link>
 

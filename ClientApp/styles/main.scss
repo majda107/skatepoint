@@ -43,3 +43,14 @@ body{
         margin: 0 32px;
     }
 }
+@media screen and (max-width: $mobile-width){
+    .main-wrapper{
+        margin: 0 24px;
+    }
+    .main-title{
+        padding: 24px 0 24px;
+        h2{
+            font-size: 26px;
+        }
+    }
+}

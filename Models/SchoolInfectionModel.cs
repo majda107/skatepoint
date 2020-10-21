@@ -8,5 +8,6 @@ namespace skolu_nepobiram.Models
     {
         public SchoolModel School { get; set; }
         public ICollection<CovidInfection> Infections { get; set; }
+        public string Notice { get; set; }
     }
 }

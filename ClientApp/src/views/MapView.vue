@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="map" ref="map">
-      <l-map :zoom="zoom" :center="center" @click="addMarker">
+      <!-- <l-map :zoom="zoom" :center="center" @click="addMarker"> -->
+      <l-map :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-marker :lat-lng="marker"></l-marker>
+        <l-marker :lat-lng="marker" @click="selectMarker"></l-marker>
 
         <!-- <l-marker :lat-lng="m" v-for="(m, i, k) in markers" :key="k"></l-marker> -->
       </l-map>
@@ -57,6 +58,9 @@ export default Vue.extend({
       console.log(event.latlng);
       //   this.markers.push(event.latlng);
       this.marker = event.latlng;
+    },
+    selectMarker: function (event: any) {
+      console.log(event);
     },
   },
 });

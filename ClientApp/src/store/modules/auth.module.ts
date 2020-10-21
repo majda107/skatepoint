@@ -18,6 +18,11 @@ const actions = {
 
     async setLogin({ commit }: any, { token, username }: any) {
         commit("setLogin", { token, username });
+    },
+
+    async setEmpty({ commit }: any) {
+        console.log("Logging out...");
+        commit("setLogin", { token: undefined, username: undefined });
     }
 }
 

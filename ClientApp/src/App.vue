@@ -37,9 +37,9 @@ export default {
 .main {
   margin-top: $nav-height;
   min-height: calc(100vh - #{$nav_height} - #{$footer-height} - #{$nav-height});
-  max-width: 1200px;
-  width: 100%;
+  background-color: $background-color;
   margin-bottom: $nav-height;
+  width: 100%;
 }
 body {
   padding: 0;
@@ -63,7 +63,7 @@ body {
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $primary-color;
     }
   }
 }

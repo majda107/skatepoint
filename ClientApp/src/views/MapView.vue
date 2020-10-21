@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrapper">
     <div class="main-title">
-        <h2>Mapa spotů</h2>
+      <h2>Mapa spotů</h2>
     </div>
     <div class="map" ref="map">
       <!-- <l-map :zoom="zoom" :center="center" @click="addMarker"> -->
@@ -18,22 +18,24 @@
       </l-map>
     </div>
     <div class="split mt-32" v-if="selected != undefined">
-        <div class="split-left">
-            <h3>{{ selected.name }}</h3>
-            <h4 class="medium mt-16">Typ</h4>
-            <p class="mt-4">{{ selected.type }}</p>
-            <h4 class="mt-16">Popisek</h4>
-            <p class="mt-4">{{ selected.description }}</p>
-            <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
-            <div class="inline-f mt-24">
-                <h4>Hodnocení</h4>
-                <button class="btn-s btn-primary" style="margin-left: 24px;">To se mi líbí</button>
-            </div>
-            <p class="mt-8 t-primary medium" style="font-size: 20px;">24 likes</p>
+      <div class="split-left">
+        <h3>{{ selected.name }}</h3>
+        <h4 class="medium mt-16">Typ</h4>
+        <p class="mt-4">{{ selected.type }}</p>
+        <h4 class="mt-16">Popisek</h4>
+        <p class="mt-4">{{ selected.description }}</p>
+        <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
+        <div class="inline-f mt-24">
+          <h4>Hodnocení</h4>
+          <button class="btn-s btn-primary" style="margin-left: 24px">
+            To se mi líbí
+          </button>
         </div>
-        <div class="split-right">
-            <img class="mt-48" src="https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg" >
-        </div>
+        <p class="mt-8 t-primary medium" style="font-size: 20px">24 likes</p>
+      </div>
+      <div class="split-right">
+        <img class="mt-48" :src="getImageUrl(selected)" />
+      </div>
     </div>
   </div>
 </template>
@@ -98,6 +100,9 @@ export default Vue.extend({
       console.log(m);
       this.selected = m;
     },
+    getImageUrl: function (p: SkatePointModel) {
+      return CONSTS.ENDPOINT + "/images/" + p.image;
+    },
   },
 });
 </script>
@@ -110,32 +115,31 @@ export default Vue.extend({
   width: 100%;
   height: 420px;
 }
-.split{
-    display: flex;
-    flex-flow: row;
-    width: 100%;
-    &-left{
-        flex: 1;
+.split {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  &-left {
+    flex: 1;
+  }
+  &-right {
+    flex: 1;
+    text-align: end;
+    padding: 0 0 0 64px;
+    img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
     }
-    &-right{
-        flex: 1;
-        text-align: end;
-        padding: 0 0 0 64px;
-        img{
-            
-            width: 100%;
-            max-height: 500px;
-            object-fit: cover;
-        }
-    }
+  }
 }
 
-@media screen and (max-width: $tablet-width){
-    .split{
-        flex-flow: column;
-        &-right{
-            padding: 0;
-        }
+@media screen and (max-width: $tablet-width) {
+  .split {
+    flex-flow: column;
+    &-right {
+      padding: 0;
     }
+  }
 }
 </style>

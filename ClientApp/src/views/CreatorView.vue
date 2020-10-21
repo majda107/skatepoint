@@ -1,6 +1,6 @@
 <template>
   <div class="creator">
-    <template v-if="getLoggedIn">
+    <!-- <template v-if="getLoggedIn"> -->
       <form>
         <label>Name</label>
         <input v-model="name" v-debounce:500ms="debounce" />
@@ -22,10 +22,10 @@
         <map-component v-on:marker="setMarker"></map-component>
         <span>lat: {{ lat }} lng: {{ lng }}</span>
       </div>
-    </template>
+    <!-- </template>
     <template v-else>
       <span>... please login</span>
-    </template>
+    </template> -->
   </div>
 </template>
 
@@ -115,10 +115,10 @@ export default Vue.extend({
   },
 
   created: async function () {
-    if (!this.getLoggedIn) {
-      this.$router.push("/login");
-      return;
-    }
+    // if (!this.getLoggedIn) {
+    //   this.$router.push("/login");
+    //   return;
+    // }
   },
 
   computed: {

@@ -26,6 +26,26 @@ namespace skolu_nepobiram.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetPoints()
+        {
+            return new JsonResult(this._db.SkatePlaces);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeletePoint([FromQuery] int id)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var entry = this._db.SkatePlaces.FirstOrDefault(t => t.Id == id);
+            if (entry == null) return NotFound();
+
+            this._db.Remove(entry);
+            await this._db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetKnownPlaces([FromQuery] string name)
         {
             if (!ModelState.IsValid) return BadRequest();

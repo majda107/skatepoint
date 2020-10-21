@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,30 @@ namespace skolu_nepobiram.Controllers
             await this._db.SaveChangesAsync();
 
             return new JsonResult(place);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> PutPointImage(IFormCollection files, int id)
+        {
+            if (files.Count != 1) return BadRequest();
+            var file = files.Files[0];
+
+            var user = this._accessor.HttpContext.User;
+            var userEntry = this._db.Users.Include(u => u.Places).FirstOrDefault(u => u.UserName == user.Identity.Name);
+            var point = userEntry?.Places?.FirstOrDefault(p => p.Id == id) ?? null;
+
+            if (point == null) return BadRequest();
+
+            var name = $"{userEntry.UserName}-{point.Id}.jpg";
+            using (var fs = new FileStream("Images/" + name, FileMode.Create))
+            {
+                await file.CopyToAsync(fs);
+            }
+
+            point.Image = name;
+
+            return new JsonResult(point);
         }
 
         [HttpGet]

@@ -8,7 +8,7 @@
       <h3>{{ point.name }}</h3>
       <span class="mt-8">{{ point.type }}</span>
       <span class="medium" style="margin-top: 4px">19 lajků</span>
-      <button class="btn-primary btn-m mt-24">Odstranit</button>
+      <button class="btn-primary btn-m mt-24" @click="remove">Odstranit</button>
     </div>
   </div>
 </template>
@@ -22,6 +22,11 @@ export default Vue.extend({
     point: {
       type: Object as () => SkatePointModel,
       required: true,
+    },
+  },
+  methods: {
+    remove: function () {
+      this.$emit("remove");
     },
   },
 });

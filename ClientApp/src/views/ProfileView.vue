@@ -5,7 +5,12 @@
         <h2>Moje spoty</h2>
       </div>
       <div class="cards">
-        <SpotComponent :point="p" v-for="(p, i, k) in points" :key="k" />
+        <SpotComponent
+          :point="p"
+          v-for="(p, i, k) in points"
+          :key="k"
+          v-on:remove="remove(p)"
+        />
       </div>
     </template>
     <template v-else>
@@ -50,6 +55,19 @@ export default Vue.extend({
 
     console.log(res.data);
     this.points = res.data;
+  },
+  methods: {
+    remove: async function (p: SkatePointModel) {
+      try {
+        const res = await axios.delete(
+          `${CONSTS.ENDPOINT}/skate/deletepoint?id=${p.id}`
+        );
+
+        this.points.splice(this.points.indexOf(p), 1);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
 });
 </script>

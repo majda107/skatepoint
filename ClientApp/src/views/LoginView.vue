@@ -1,8 +1,8 @@
 <template>
-  <div class="login main-wrapper">
-      <div class="login-content">
-          <h2>Přihlášení školy</h2>
-          <input v-model="username" type="text" class="input-s mt-32 width-100p" placeholder="priklad@mail.cz" >
+  <div class="auth main-wrapper">
+      <div class="auth-content">
+          <h2>Přihlášení uživatele</h2>
+          <input v-model="username" type="text" class="input-s mt-32 width-100p" placeholder="username" >
           <input v-model="password" type="password"  class="input-s mt-24 width-100p" placeholder="Heslo">
           <button @click="this.login" class="btn-m btn-primary mt-24 width-100p">Přihlásit</button>
       </div>
@@ -45,18 +45,5 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 @import "../../styles/main.scss";
-.login{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background-color: $background-color;
-    margin-top: 96px;
-    &-content{
-        display: flex;
-        flex-flow: column;
-        width: 320px;
-        align-items: center;
-        justify-content: center;
-    }
-}
+@import "../../styles/layout/auth.scss";
 </style>

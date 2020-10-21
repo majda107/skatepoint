@@ -4,23 +4,32 @@
       <div class="nav-content-title">
         <div class="nav-content-title-logo">
           <router-link to="/">
-            <h1>Školu Nepobírám</h1>
+            <h1>Skate spots</h1>
           </router-link>
         </div>
       </div>
       <div class="nav-content-menu">
         <ul class="nav-content-menu-items">
           <router-link to="/search" class="nav-content-menu-items-item">
-            <li class="nav-content-menu-items-item">Hledat školu</li>
+            <li class="nav-content-menu-items-item">Mapa</li>
           </router-link>
 
-          <router-link to="/">
-            <li class="nav-content-menu-items-item">Aktuální opatření</li>
+          <router-link to="/add">
+            <li class="nav-content-menu-items-item">Přidat spot</li>
+          </router-link>
+
+          <router-link to="/profile">
+            <li class="nav-content-menu-items-item">Profil</li>
           </router-link>
 
           <router-link to="/login">
+            <li class="nav-content-menu-items-item btn-s btn-secondary">
+              Přihlásit
+            </li>
+          </router-link>
+          <router-link to="/register">
             <li class="nav-content-menu-items-item btn-s btn-primary">
-              Přihlášení školy
+              Registrovat
             </li>
           </router-link>
         </ul>

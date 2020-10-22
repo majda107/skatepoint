@@ -45,7 +45,7 @@ const routes: Array<RouteConfig> = [
     component: ProfileView
   },
   {
-    path: "/documentation",
+    path: "/api",
     name: "Documentation",
     component: DocumentationView
   }

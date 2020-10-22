@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
     <div class="landing-upper">
-      <h2>Otevřená databáze skatespotů pro lidi</h2>
+      <h2>Otevřená databáze skatespotů pro nadšence</h2>
       <router-link to="/map"
         ><button class="btn-l btn-primary">Přejít na mapu</button></router-link
       >

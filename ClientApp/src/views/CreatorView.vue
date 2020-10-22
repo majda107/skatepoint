@@ -7,16 +7,20 @@
     <div class="creator">
       <div class="creator-left">
         <form>
-          <label>Name</label>
-          <input
-            type="text"
-            class="mt-4"
-            v-model="name"
-            v-debounce:500ms="debounce"
-          />
-          <ul>
-            <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
-          </ul>
+          <div class="auto-fill">
+            <div class="auto-fill-input">
+              <label>Name</label>
+              <input
+                type="text"
+                class="mt-4"
+                v-model="name"
+                v-debounce:500ms="debounce"
+              />
+            </div>
+            <ul class="auto-fill-results">
+              <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
+            </ul>
+          </div>
 
           <label class="mt-8">Type</label>
           <input type="text" class="mt-4" v-model="type" />
@@ -42,7 +46,10 @@
         <div class="map">
           <map-component v-on:marker="setMarker"></map-component>
         </div>
-        <p class="mt-16"><span class="medium">lat:</span> {{ lat }} <span class="medium">lng:</span> {{ lng }}</p>
+        <p class="mt-16">
+          <span class="medium">lat:</span> {{ lat }}
+          <span class="medium">lng:</span> {{ lng }}
+        </p>
       </div>
     </div>
     <!-- </template>
@@ -164,9 +171,9 @@ export default Vue.extend({
   flex-flow: row;
   &-left {
     flex: 1;
-    margin-bottom: 32px;;
-    form{
-        margin-right: 48px;
+    margin-bottom: 32px;
+    form {
+      margin-right: 48px;
     }
   }
   &-right {
@@ -176,6 +183,40 @@ export default Vue.extend({
   }
 }
 
+.auto-fill{
+    position: relative;
+    &-input{
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+    }
+    ul{
+        list-style: none;
+        position: absolute;
+        background-color: $secondary-color;
+        @include shadow-outset;
+        width: 100%;
+        margin: 8px 0 0;
+        padding: 8px 24px;
+        box-sizing: border-box;
+        @include input-border;
+        border-radius: 8px;
+        overflow-y: auto;
+        max-height: 420px;
+        li{
+            padding: 16px 0;
+            border-bottom: 1px solid #C8C8C8;
+            cursor: pointer;
+            transition: color 0.2s;
+            &:hover{
+                color: $primary-color;
+            }
+            &:last-of-type{
+                border-bottom: none;
+            }
+        }
+    }
+}
 .map {
   width: 100%;
   height: 420px;
@@ -189,17 +230,17 @@ form {
   flex-flow: column;
 }
 
-@media screen and (max-width: $mobile-width){
-    .creator{
-        flex-flow: column-reverse;
-        &-left{
-            form{
-                margin: 0;
-            }
-        }
-        &-right{
-            margin-bottom: 32px;
-        }
+@media screen and (max-width: $mobile-width) {
+  .creator {
+    flex-flow: column-reverse;
+    &-left {
+      form {
+        margin: 0;
+      }
     }
+    &-right {
+      margin-bottom: 32px;
+    }
+  }
 }
 </style>

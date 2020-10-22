@@ -1,26 +1,21 @@
 <template>
-  <div class="landing main-wrapper">
+  <div class="landing">
     <div class="landing-upper">
-      <h1>Otevřená databáze skatespotů pro lidi</h1>
+      <h2>Otevřená databáze skatespotů pro lidi</h2>
       <router-link to="/map"
         ><button class="btn-l btn-primary">Přejít na mapu</button></router-link
       >
     </div>
     <div class="landing-lower">
-      <h2>Náš projekt</h2>
+      <div class="main-title">
+        <h2>Náš projekt</h2>
+      </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu posuere
-        dolor. Donec mi eros, dignissim volutpat sodales vel, tempus vitae eros.
-        Integer volutpat auctor lacus, a ornare mi iaculis sit amet. Donec vel
-        diam ullamcorper, pharetra felis sit amet, fringilla enim. Duis maximus
-        orci nisl. Class aptent taciti sociosqu ad litora torquent per conubia
-        nostra, per inceptos himenaeos. Integer cursus, lacus vel pharetra
-        faucibus, orci ligula facilisis ante, non imperdiet velit diam id leo.
-        Mauris sed luctus elit, a posuere est. Etiam sodales libero ac
-        ullamcorper vehicula. Maecenas sollicitudin sollicitudin odio non
-        aliquet. Orci varius natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Maecenas sit amet lobortis quam. Sed feugiat at
-        dolor a fermentum. Cras eget tortor in mi imperdiet sollicitudin.
+        Náš projekt má za cíl zpříjemnit život všem nadšencům do skatingu, tím
+        že budou mít možnost volně přidávat a prohlížet místa pro skating. Jsme
+        si vědomi toho, že není jednoduché najít dobré místo pro skatování. Když
+        se nějaké místo najde a chcete se o něj podělit se světem, tak naše
+        aplikace je skvělá volba která nabízí i volně přístupnou API.
       </p>
     </div>
   </div>

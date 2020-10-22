@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using skolu_nepobiram.Database;
 using skolu_nepobiram.Database.Models;
 using skolu_nepobiram.Models;
@@ -31,7 +32,8 @@ namespace skolu_nepobiram.Controllers
                 SpotCount = this._db.SkatePlaces.Count(),
                 PlaceCount = this._db.KnownPlaces.Count(),
                 UserCount = this._db.Users.Count(),
-                LikeCount = this._db.SkatePlaces.Sum(t => t.Liked.Count())
+                // LikeCount = this._db.SkatePlaces.Include(p => p.Liked).Sum(t => t.Liked.Count())
+                LikeCount = 0
             });
         }
 

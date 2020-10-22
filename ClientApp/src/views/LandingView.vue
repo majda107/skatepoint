@@ -5,6 +5,13 @@
       <router-link to="/map"
         ><button class="btn-l btn-primary">Přejít na mapu</button></router-link
       >
+      <video
+        id="landing-upper-video"
+        style="width: 100%; height: 100%"
+        no-controls
+        autoplay
+        src="../videos/skate.mp4"
+      ></video>
     </div>
     <div class="landing-lower">
       {{ spots.toFixed(0) }}
@@ -58,4 +65,9 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import "../../styles/variables/variables.scss";
+#landing-upper-video {
+  width: 100%;
+  position: absolute;
+  object-fit: fill;
+}
 </style>

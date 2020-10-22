@@ -101,7 +101,7 @@ export default Vue.extend({
       this.selected = m;
     },
     getImageUrl: function (p: SkatePointModel) {
-      if (p.image.startsWith("http")) return p.image;
+      if (p.image?.startsWith("http")) return p.image;
       return CONSTS.ENDPOINT + "/images/" + p.image;
     },
   },

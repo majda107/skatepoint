@@ -44,16 +44,22 @@ export default {
 body {
   padding: 0;
   margin: 0;
+
+  // background: black;
+  // filter: invert(1) hue-rotate(180deg);
+  
+  // img, .map {
+  //   filter: invert(1) hue-rotate(180deg);
+  // }
 }
 
 #app {
-
   display: flex;
   align-items: center;
   flex-flow: column;
 }
-.view{
-    padding-top: 72px;
+.view {
+  padding-top: 72px;
 }
 #nav {
   padding: 30px;

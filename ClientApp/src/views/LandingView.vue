@@ -10,6 +10,7 @@
         style="width: 100%; height: 100%"
         no-controls
         autoplay
+        loop
         src="../videos/skate.mp4"
       ></video>
     </div>

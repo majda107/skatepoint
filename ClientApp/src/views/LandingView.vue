@@ -2,7 +2,7 @@
   <div class="landing main-wrapper">
     <div class="landing-upper">
       <h1>Otevřená databáze skatespotů pro lidi</h1>
-      <router-link to="/search"
+      <router-link to="/map"
         ><button class="btn-l btn-primary">Přejít na mapu</button></router-link
       >
     </div>

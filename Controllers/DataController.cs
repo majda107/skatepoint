@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +68,54 @@ namespace skolu_nepobiram.Controllers
             await this._db.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoadSpotsXML()
+        {
+            var xml = new XmlDocument();
+            using (FileStream fs = new FileStream("spots.kml", FileMode.Open))
+            {
+                xml.Load(fs);
+
+                var root = xml.DocumentElement.FirstChild;
+
+                var r = new Regex("\"(?<src>.*?)\"");
+
+                int i = 0;
+                // var names = new List<string>();
+                foreach (XmlNode node in root.ChildNodes)
+                {
+                    i++;
+                    if (node.Name != "Placemark") continue;
+                    // names.Add(node?["name"]?.InnerText ?? "");
+                    var name = node?["name"].InnerText ?? "";
+                    if (name == "") continue;
+
+                    var coords = node?["Point"]?["coordinates"]?.InnerText.Split(",");
+
+                    var image = node?["description"]?.InnerText ?? "";
+                    var match = r.Match(image);
+
+                    var entry = new SkatePlace()
+                    {
+                        Name = name + i.ToString(),
+                        Lat = double.Parse(coords[1]),
+                        Lng = double.Parse(coords[0]),
+                        Type = "Stair",
+                        Description = "Imported from open-data",
+                        Image = match?.Groups["src"].Value ?? ""
+                    };
+
+                    // return new JsonResult(entry);
+                    this._db.SkatePlaces.Add(entry);
+                }
+
+                await this._db.SaveChangesAsync();
+
+                // return new JsonResult(names);
+                return Ok();
+            }
         }
 
         [HttpPost]

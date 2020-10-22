@@ -4,7 +4,7 @@
       <div class="nav-content-title">
         <div class="nav-content-title-logo">
           <router-link to="/">
-            <h1>Skate spots</h1>
+            <h1>Skatepoint</h1>
           </router-link>
         </div>
       </div>

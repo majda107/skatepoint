@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -121,11 +122,16 @@ namespace skolu_nepobiram.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
             var user = this._accessor.HttpContext.User;
-            var userEntry = this._db.Users.Include(u => u.Places).FirstOrDefault(u => u.UserName == user.Identity.Name);
+            // var userEntry = this._db.Users.Include(u => u.Places).FirstOrDefault(u => u.UserName == user.Identity.Name);
 
-            if (userEntry == null) return Unauthorized();
+            // if (userEntry == null) return Unauthorized();
+            // this._db.Users.Select(u => u.Places).FirstOrDefault(e => e.)
 
-            return new JsonResult(userEntry.Places);
+            var places = this._db.Users.Where(u => u.UserName == user.Identity.Name).Select(u => u.Places)
+                .FirstOrDefault();
+            if (places == null) return NotFound();
+
+            return new JsonResult(places);
         }
 
         [HttpDelete]

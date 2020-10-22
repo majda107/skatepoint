@@ -5,9 +5,15 @@
       <router-link to="/map"
         ><button class="btn-l btn-primary">Přejít na mapu</button></router-link
       >
-      <video id="landing-upper-video" no-controls autoplay loop="true">
-        <source type="video/mp4" src="@/assets/skate.mp4" />
-        <source type="video/webm" src="@/assets/skate.mp4" />
+      <video
+        id="landing-upper-video"
+        no-controls
+        autoplay
+        loop="true"
+        plays-inline
+      >
+        <!-- <source type="video/mp4" src="@/assets/skate.mp4" /> -->
+        <source type="video/webm" src="@/assets/video.webm" />
       </video>
     </div>
     <div class="landing-lower">

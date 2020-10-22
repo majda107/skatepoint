@@ -77,7 +77,6 @@ export default Vue.extend({
     ...mapActions(["setEmpty"]),
     ToggleMobile: function () {
       this.isMobileOpened = !this.isMobileOpened;
-      console.log(this.isMobileOpened);
     },
     logout: async function () {
       this.setEmpty();

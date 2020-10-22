@@ -71,7 +71,7 @@ export default Vue.extend({
   data() {
     return {
       zoom: 13,
-      center: L.latLng(47.41322, -1.219482),
+      center: L.latLng(50.209907, 15.833335),
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -82,6 +82,15 @@ export default Vue.extend({
   },
 
   created: async function () {
+    navigator.geolocation.getCurrentPosition(
+      (p) => {
+        this.center = L.latLng(p.coords.latitude, p.coords.longitude);
+
+        console.log("POSITION FETCHED");
+        console.log(this.center);
+      },
+      (e) => console.log(e)
+    );
     // const container = this.$refs.map as HTMLElement;
     // container.appendChild(map.show());
     const res = await axios.get(`${CONSTS.ENDPOINT}/skate/getpoints`);

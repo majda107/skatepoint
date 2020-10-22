@@ -24,6 +24,9 @@
           <router-link to="/profile">
             <li class="nav-content-menu-items-item">Profil</li>
           </router-link>
+           <router-link to="/documentation">
+            <li class="nav-content-menu-items-item">API</li>
+          </router-link>
 
           <template v-if="getLoggedIn">
             <li

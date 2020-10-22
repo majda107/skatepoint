@@ -9,6 +9,7 @@ import MapView from "../views/MapView.vue";
 import RegisterView from "../views/RegisterView.vue"
 import ProfileView from "../views/ProfileView.vue"
 import CreatorView from "../views/CreatorView.vue"
+import DocumentationView from "../views/DocumentationView.vue"
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,11 @@ const routes: Array<RouteConfig> = [
     path: "/profile",
     name: "Profile",
     component: ProfileView
+  },
+  {
+    path: "/documentation",
+    name: "Documentation",
+    component: DocumentationView
   }
 ]
 

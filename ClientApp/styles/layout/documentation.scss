@@ -1,0 +1,17 @@
+.doc {
+  &-header {
+  }
+  &-about {
+  }
+  &-code {
+    border-radius: 3px;
+    background-color: $background-dark;
+    color: $background-color;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    border: none;
+    line-height: 1.4em;
+  }
+}

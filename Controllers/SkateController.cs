@@ -66,9 +66,9 @@ namespace skolu_nepobiram.Controllers
             return new JsonResult(point);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Authorize]
-        public async Task<IActionResult> LikePoint([FromQuery] bool like, [FromQuery] int id)
+        public async Task<IActionResult> PutLike([FromQuery] bool like, [FromQuery] int id)
         {
             var user = this._accessor.HttpContext.User;
             var userEntry = this._db.Users.Include(u => u.Places).FirstOrDefault(u => u.UserName == user.Identity.Name);

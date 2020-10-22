@@ -4,7 +4,7 @@
     <div class="card-content">
       <h3>{{ point.name }}</h3>
       <span class="mt-8">{{ point.type }}</span>
-      <span class="medium" style="margin-top: 4px">19 lajků</span>
+      <!-- <span class="medium" style="margin-top: 4px">19 lajků</span> -->
       <button class="btn-primary btn-m mt-24" @click="remove">Odstranit</button>
     </div>
   </div>

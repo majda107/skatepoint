@@ -3,27 +3,29 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  h1 {
-    text-align: center;
-  }
   .landing-upper {
-    height: 350px;
+    height: 380px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     // background-image: url('https://imgur.com/8Qbi89e.jpg');
-    background-color: #c4c4c4;
-    width: 100vw;
-    h1 {
+    background-image: url("https://i.ibb.co/T4BzP01/skate.jpg");
+    width: 100%;
+    h2 {
       margin-bottom: 30px;
+      text-align: center;
+      font-weight: 600;
+      padding: 0 24px;
+      color: $secondary-color;
     }
   }
   .landing-lower {
-    height: 300px;
+    height: auto;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-flow: column;
+    max-width: 1200px;
+    margin: auto;
     h2 {
       margin-bottom: 10px;
     }
@@ -32,7 +34,14 @@
 
 @media screen and (max-width: 1264px) {
   .landing-lower {
-    height: auto !important;
-    margin-top: 20px;
+    margin: 0 32px !important;
+    width: auto;
+    box-sizing: border-box;
+    max-width: none;
   }
+}
+@media screen and (max-width: $mobile-width){
+    .landing-lower{
+        margin: 0 24px !important;
+    }
 }

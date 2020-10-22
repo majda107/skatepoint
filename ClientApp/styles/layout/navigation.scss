@@ -65,11 +65,13 @@
     margin-top: auto;
     margin-bottom: auto;
     .hamburger {
+      cursor: pointer;
       align-self: center;
       div {
         transition: 0.5s all;
         width: 35px;
-        height: 5px;
+        height: 4px;
+        border-radius: 2px;
         margin-bottom: 6px;
         background-color: black;
         &:last-of-type {
@@ -82,13 +84,13 @@
     .hamburger {
       div {
         &:first-of-type {
-          transform: translateY(11px) rotate(-45deg);
+          transform: translateY(10px) rotate(-45deg);
         }
         &:nth-of-type(2) {
           opacity: 0;
         }
         &:last-of-type {
-          transform: translateY(-11px) rotate(45deg);
+          transform: translateY(-10px) rotate(45deg);
         }
       }
     }

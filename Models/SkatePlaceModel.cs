@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace skolu_nepobiram.Database.Models
+namespace skolu_nepobiram.Models
 {
-    public class SkatePlace
+    public class SkatePlaceModel
     {
-        [Key] public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -17,6 +17,6 @@ namespace skolu_nepobiram.Database.Models
 
         public string Image { get; set; }
 
-        public List<ApplicationUser> Liked { get; set; }
+        public ICollection<string> Liked { get; set; }
     }
 }

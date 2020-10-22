@@ -5,5 +5,6 @@ export interface SkatePointModel {
     lng: number,
     description: string,
     type: string,
-    image: string
+    image: string,
+    liked: string[]
 }

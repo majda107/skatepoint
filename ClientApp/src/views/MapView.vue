@@ -27,11 +27,23 @@
         <span>lat: {{ selected.lat }} lng: {{ selected.lng }}</span>
         <div class="inline-f mt-24">
           <h4>Hodnocení</h4>
-          <button class="btn-s btn-primary" style="margin-left: 24px">
-            To se mi líbí
+
+          <button
+            v-if="getLoggedIn"
+            class="btn-s btn-primary"
+            style="margin-left: 24px"
+            @click="likeSelected"
+          >
+            {{
+              !selected.liked.includes(getUsername)
+                ? "To se mi líbí"
+                : "Už se mi to nelíbí"
+            }}
           </button>
         </div>
-        <p class="mt-8 t-primary medium" style="font-size: 20px">24 likes</p>
+        <p class="mt-8 t-primary medium" style="font-size: 20px">
+          {{ selected.liked.length }} lajků
+        </p>
       </div>
       <div class="split-right">
         <img class="mt-48" :src="getImageUrl(selected)" />
@@ -51,6 +63,7 @@ import L, { MarkerOptions } from "leaflet";
 import { CONSTS } from "@/models/consts";
 import { SkatePointModel } from "@/models/skate-point-model";
 import { PairedPointModel } from "@/models/paired-point-model";
+import { mapGetters } from "vuex";
 
 // eslint-disable-next-line
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -71,7 +84,7 @@ export default Vue.extend({
   data() {
     return {
       zoom: 13,
-      center: L.latLng(47.41322, -1.219482),
+      center: L.latLng(50.209907, 15.833335),
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -82,6 +95,15 @@ export default Vue.extend({
   },
 
   created: async function () {
+    navigator.geolocation.getCurrentPosition(
+      (p) => {
+        this.center = L.latLng(p.coords.latitude, p.coords.longitude);
+
+        console.log("POSITION FETCHED");
+        console.log(this.center);
+      },
+      (e) => console.log(e)
+    );
     // const container = this.$refs.map as HTMLElement;
     // container.appendChild(map.show());
     const res = await axios.get(`${CONSTS.ENDPOINT}/skate/getpoints`);
@@ -94,6 +116,9 @@ export default Vue.extend({
       } as PairedPointModel;
     });
   },
+  computed: {
+    ...mapGetters(["getLoggedIn", "getUsername", "getToken"]),
+  },
 
   methods: {
     selectMarker: function (m: SkatePointModel) {
@@ -103,6 +128,34 @@ export default Vue.extend({
     getImageUrl: function (p: SkatePointModel) {
       if (p.image?.startsWith("http")) return p.image;
       return CONSTS.ENDPOINT + "/images/" + p.image;
+    },
+    likeSelected: async function () {
+      const liked = this.selected?.liked?.includes(this.getUsername);
+
+      try {
+        const res = await axios.put(
+          `${CONSTS.ENDPOINT}/skate/putlike?like=${!liked}&id=${
+            this.selected?.id ?? ""
+          }`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${this.getToken}`,
+            },
+          }
+        );
+
+        if (liked) {
+          this?.selected?.liked?.splice(
+            this.selected?.liked?.indexOf(this.getUsername),
+            1
+          );
+        } else {
+          this?.selected?.liked.push(this.getUsername);
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 });

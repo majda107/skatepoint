@@ -39,18 +39,32 @@ export default Vue.extend({
   data() {
     return {
       zoom: 13,
-      center: L.latLng(47.41322, -1.219482),
+      center: L.latLng(50.209907, 15.833335),
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(47.41322, -1.219482),
+      marker: L.latLng(50.209907, 15.833335),
       //   markers: [] as any[],
     };
   },
 
-  mounted: function () {
+  created: function () {
     // const container = this.$refs.map as HTMLElement;
     // container.appendChild(map.show());
+    navigator.geolocation.getCurrentPosition(
+      (p) => {
+        this.center = L.latLng(p.coords.latitude, p.coords.longitude);
+        this.marker = L.latLng(p.coords.latitude, p.coords.longitude);
+
+        this.$emit("marker", this.marker);
+
+        console.log("POSITION FETCHED");
+        console.log(this.center);
+      },
+      (e) => console.log(e)
+    );
+
+    this.$emit("marker", this.marker);
   },
 
   methods: {

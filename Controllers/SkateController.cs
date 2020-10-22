@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using skolu_nepobiram.Database;
 using skolu_nepobiram.Database.Models;
+using skolu_nepobiram.Models;
 
 namespace skolu_nepobiram.Controllers
 {
@@ -65,10 +66,44 @@ namespace skolu_nepobiram.Controllers
             return new JsonResult(point);
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> LikePoint([FromQuery] bool like, [FromQuery] int id)
+        {
+            var user = this._accessor.HttpContext.User;
+            var userEntry = this._db.Users.Include(u => u.Places).FirstOrDefault(u => u.UserName == user.Identity.Name);
+            var point = this._db.SkatePlaces.Include(s => s.Liked).FirstOrDefault(p => p.Id == id);
+
+            if (userEntry == null || point == null) return BadRequest();
+
+            if (like && !point.Liked.Any(u => u.UserName == userEntry.UserName))
+                point.Liked.Add(userEntry);
+            else if (!like && point.Liked.Any(u => u.UserName == userEntry.UserName))
+                point.Liked.Remove(userEntry);
+            else return new ConflictResult();
+
+            await this._db.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetPoints()
         {
-            return new JsonResult(this._db.SkatePlaces);
+            var places = this._db.SkatePlaces.Include(p => p.Liked).Select(p =>
+                new SkatePlaceModel()
+                {
+                    Description = p.Description,
+                    Id = p.Id,
+                    Image = p.Image,
+                    Lat = p.Lat,
+                    Lng = p.Lng,
+                    Liked = p.Liked.Select(u => u.UserName).ToArray(),
+                    Name = p.Name,
+                    Type = p.Type
+                });
+
+            return new JsonResult(places);
         }
 
         [HttpGet]

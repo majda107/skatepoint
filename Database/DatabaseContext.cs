@@ -21,5 +21,13 @@ namespace skolu_nepobiram.Database
         {
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<SkatePlace>().HasMany(p => p.Liked);
+            builder.Entity<ApplicationUser>().HasMany(u => u.Places);
+
+            base.OnModelCreating(builder);
+        }
     }
 }

@@ -1,27 +1,50 @@
 <template>
-  <div class="creator">
+  <div class="main-wrapper">
     <!-- <template v-if="getLoggedIn"> -->
-      <form>
-        <label>Name</label>
-        <input v-model="name" v-debounce:500ms="debounce" />
-        <ul>
-          <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
-        </ul>
+    <div class="main-title">
+      <h2>Přidání místa pro skating</h2>
+    </div>
+    <div class="creator">
+      <div class="creator-left">
+        <form>
+          <label>Name</label>
+          <input
+            type="text"
+            class="mt-4"
+            v-model="name"
+            v-debounce:500ms="debounce"
+          />
+          <ul>
+            <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
+          </ul>
 
-        <label>Type</label>
-        <input v-model="type" />
-        <label>Description</label>
-        <input v-model="description" />
+          <label class="mt-8">Type</label>
+          <input type="text" class="mt-4" v-model="type" />
+          <label class="mt-8">Description</label>
+          <textarea rows="3" class="mt-4" v-model="description" />
 
-        <label>Image</label>
-        <input type="file" ref="fileInput" />
+          <div class="file-input mt-16">
+            <input type="file" ref="fileInput" id="file" />
+            <label for="file">Nahrát obrázek</label>
+            <span style="margin-left: 24px;">img.jpg</span>
+          </div>
 
-        <button type="button" @click="upload">Upload</button>
-      </form>
-      <div class="map">
-        <map-component v-on:marker="setMarker"></map-component>
-        <span>lat: {{ lat }} lng: {{ lng }}</span>
+          <button
+            class="btn-m mt-24 btn-secondary"
+            type="button"
+            @click="upload"
+          >
+            Upload
+          </button>
+        </form>
       </div>
+      <div class="creator-right">
+        <div class="map">
+          <map-component v-on:marker="setMarker"></map-component>
+        </div>
+        <p class="mt-16"><span class="medium">lat:</span> {{ lat }} <span class="medium">lng:</span> {{ lng }}</p>
+      </div>
+    </div>
     <!-- </template>
     <template v-else>
       <span>... please login</span>
@@ -48,7 +71,7 @@ export default Vue.extend({
   components: {
     MapComponent,
   },
-  data: function () {
+  data: function() {
     return {
       name: "",
       type: "",
@@ -60,7 +83,7 @@ export default Vue.extend({
   },
 
   methods: {
-    upload: async function () {
+    upload: async function() {
       const fileInput = this.$refs.fileInput as HTMLInputElement;
       const file = fileInput?.files?.item(0) ?? null;
 
@@ -99,12 +122,12 @@ export default Vue.extend({
 
       this.$router.push("/map");
     },
-    setMarker: async function (latlng: any) {
+    setMarker: async function(latlng: any) {
       console.log(latlng);
       this.lat = latlng.lat;
       this.lng = latlng.lng;
     },
-    debounce: async function () {
+    debounce: async function() {
       const res = await axios.get(
         `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`
       );
@@ -114,7 +137,7 @@ export default Vue.extend({
     },
   },
 
-  created: async function () {
+  created: async function() {
     // if (!this.getLoggedIn) {
     //   this.$router.push("/login");
     //   return;
@@ -128,19 +151,55 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+// .creator {
+//   display: grid;
+//   grid-template-columns: 1fr auto;
+//   grid-template-rows: auto;
+// }
+
+@import "../../styles/main.scss";
+
 .creator {
+  display: flex;
+  flex-flow: row;
+  &-left {
+    flex: 1;
+    margin-bottom: 32px;;
+    form{
+        margin-right: 48px;
+    }
+  }
+  &-right {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.map {
+  width: 100%;
+  height: 420px;
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: auto;
 }
 
-.map {
-  width: 600px;
-  height: 460px;
-}
-
 form {
   display: flex;
   flex-flow: column;
+}
+
+@media screen and (max-width: $mobile-width){
+    .creator{
+        flex-flow: column-reverse;
+        &-left{
+            form{
+                margin: 0;
+            }
+        }
+        &-right{
+            margin-bottom: 32px;
+        }
+    }
 }
 </style>

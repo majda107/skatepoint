@@ -1,5 +1,9 @@
 <template>
-  <section class="footer">Hackathon 2020. Tým Nepobírám.</section>
+  <section class="footer">Hackathon 2020. Tým Nepobírám.
+    <div class="footer-links">
+      <router-link to="/api">API</router-link>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

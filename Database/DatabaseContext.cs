@@ -7,9 +7,6 @@ namespace skolu_nepobiram.Database
 {
     public class DatabaseContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
-        public DbSet<SchoolModel> Schools { get; set; }
-        public DbSet<CovidInfection> ProvinceInfections { get; set; }
-
         public DbSet<SkatePlace> SkatePlaces { get; set; }
         public DbSet<KnownPlace> KnownPlaces { get; set; }
 

@@ -22,6 +22,15 @@ namespace skolu_nepobiram.Controllers
             this._accessor = accessor;
         }
 
+
+        [HttpGet]
+        [Route("/hackathon")]
+        public async Task<IActionResult> Hackathon()
+        {
+            return new ObjectResult("Hackathon 2020. Tým Nepobírám.");
+        }
+
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddPoint([FromBody] SkatePlace place)

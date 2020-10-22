@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using skolu_nepobiram.Database;
 
 namespace skolu_nepobiram.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20201022072846_liked points")]
+    partial class likedpoints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,6 +222,36 @@ namespace skolu_nepobiram.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("skolu_nepobiram.Database.Models.CovidInfection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Died")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Infected")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProvinceLau")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Recovered")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProvinceInfections");
+                });
+
             modelBuilder.Entity("skolu_nepobiram.Database.Models.KnownPlace", b =>
                 {
                     b.Property<int>("Id")
@@ -239,6 +271,37 @@ namespace skolu_nepobiram.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KnownPlaces");
+                });
+
+            modelBuilder.Entity("skolu_nepobiram.Database.Models.SchoolModel", b =>
+                {
+                    b.Property<string>("ICO")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Capacity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CapacityUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrincipalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ICO");
+
+                    b.ToTable("Schools");
                 });
 
             modelBuilder.Entity("skolu_nepobiram.Database.Models.SkatePlace", b =>

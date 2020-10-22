@@ -17,8 +17,14 @@
                 v-debounce:500ms="debounce"
               />
             </div>
-            <ul class="auto-fill-results">
-              <li v-for="(p, i, k) in places" :key="k">{{ p.name }}</li>
+            <ul class="auto-fill-results" v-show="places.length > 0">
+              <li
+                v-for="(p, i, k) in places"
+                :key="k"
+                @click="chooseName(p.name)"
+              >
+                {{ p.name }} | {{ p.type }}
+              </li>
             </ul>
           </div>
 
@@ -30,7 +36,7 @@
           <div class="file-input mt-16">
             <input type="file" ref="fileInput" id="file" />
             <label for="file">Nahrát obrázek</label>
-            <span style="margin-left: 24px;">img.jpg</span>
+            <span style="margin-left: 24px">img.jpg</span>
           </div>
 
           <button
@@ -78,7 +84,7 @@ export default Vue.extend({
   components: {
     MapComponent,
   },
-  data: function() {
+  data: function () {
     return {
       name: "",
       type: "",
@@ -90,7 +96,7 @@ export default Vue.extend({
   },
 
   methods: {
-    upload: async function() {
+    upload: async function () {
       const fileInput = this.$refs.fileInput as HTMLInputElement;
       const file = fileInput?.files?.item(0) ?? null;
 
@@ -129,12 +135,12 @@ export default Vue.extend({
 
       this.$router.push("/map");
     },
-    setMarker: async function(latlng: any) {
+    setMarker: async function (latlng: any) {
       console.log(latlng);
       this.lat = latlng.lat;
       this.lng = latlng.lng;
     },
-    debounce: async function() {
+    debounce: async function () {
       const res = await axios.get(
         `${CONSTS.ENDPOINT}/skate/getknownplaces?name=${this.name}`
       );
@@ -142,9 +148,13 @@ export default Vue.extend({
       const places: KnownPlaceModel[] = res.data as KnownPlaceModel[];
       this.places = places;
     },
+    chooseName: function (s: string) {
+      this.name = s;
+      this.places = [];
+    },
   },
 
-  created: async function() {
+  created: async function () {
     // if (!this.getLoggedIn) {
     //   this.$router.push("/login");
     //   return;
@@ -183,39 +193,39 @@ export default Vue.extend({
   }
 }
 
-.auto-fill{
-    position: relative;
-    &-input{
-        display: flex;
-        flex-flow: column;
-        width: 100%;
+.auto-fill {
+  position: relative;
+  &-input {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+  }
+  ul {
+    list-style: none;
+    position: absolute;
+    background-color: $secondary-color;
+    @include shadow-outset;
+    width: 100%;
+    margin: 8px 0 0;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    @include input-border;
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 420px;
+    li {
+      padding: 16px 0;
+      border-bottom: 1px solid #c8c8c8;
+      cursor: pointer;
+      transition: color 0.2s;
+      &:hover {
+        color: $primary-color;
+      }
+      &:last-of-type {
+        border-bottom: none;
+      }
     }
-    ul{
-        list-style: none;
-        position: absolute;
-        background-color: $secondary-color;
-        @include shadow-outset;
-        width: 100%;
-        margin: 8px 0 0;
-        padding: 8px 24px;
-        box-sizing: border-box;
-        @include input-border;
-        border-radius: 8px;
-        overflow-y: auto;
-        max-height: 420px;
-        li{
-            padding: 16px 0;
-            border-bottom: 1px solid #C8C8C8;
-            cursor: pointer;
-            transition: color 0.2s;
-            &:hover{
-                color: $primary-color;
-            }
-            &:last-of-type{
-                border-bottom: none;
-            }
-        }
-    }
+  }
 }
 .map {
   width: 100%;

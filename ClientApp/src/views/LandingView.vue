@@ -7,25 +7,27 @@
       >
       <video
         id="landing-upper-video"
-        style="width: 100%; height: 100%"
         no-controls
         autoplay
-        loop
-        src="../videos/skate.mp4"
-      ></video>
+        loop="true"
+        plays-inline
+      >
+        <!-- <source type="video/mp4" src="@/assets/skate.mp4" /> -->
+        <source type="video/webm" src="@/assets/video.webm" />
+      </video>
     </div>
     <div class="landing-lower">
         <div class="statistics">
             <div class="statistics-content">
-                <div class="statistics-content-number">69</div>
+                <div class="statistics-content-number">{{ spots.toFixed(0) }}</div>
                 <div class="statistics-content-description">skatespotů</div>
             </div>
             <div class="statistics-content" style="justify-content: center;">
-                <div class="statistics-content-number">69</div>
+                <div class="statistics-content-number">{{ users.toFixed(0)}}</div>
                 <div class="statistics-content-description">uživatelů</div>
             </div>
             <div class="statistics-content" style="justify-content: flex-end;">
-                <div class="statistics-content-number">69485</div>
+                <div class="statistics-content-number">{{ places.toFixed(0)}}</div>
                 <div class="statistics-content-description">lokací</div>
             </div>
         </div>
@@ -45,13 +47,43 @@
 
 <script lang="ts">
 import Vue from "vue";
+import axios from "axios";
+import { CONSTS } from "@/models/consts";
+import gsap from "gsap";
+import { StatisticsModel } from "../models/statistics-model";
+
 export default Vue.extend({
   name: "LadingView",
+  data: function () {
+    return {
+      stats: undefined as StatisticsModel | undefined,
+      // tStats: undefined as StatisticsModel | undefined,
+      spots: 0,
+      users: 0,
+      places: 0,
+    };
+  },
+  created: async function () {
+    const res = await axios.get(`${CONSTS.ENDPOINT}/data/getstatistics`);
+    this.stats = res.data;
+  },
+  watch: {
+    stats: function (newValue) {
+      gsap.to(this.$data, { duration: 0.5, spots: newValue.spotCount });
+      gsap.to(this.$data, { duration: 0.5, users: newValue.userCount });
+      gsap.to(this.$data, { duration: 0.5, places: newValue.placeCount });
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 @import "../../styles/variables/variables.scss";
+
+.landing-upper {
+  position: relative;
+  overflow: hidden;
+}
 .statistics{
     display: flex;
     flex-flow: row;
@@ -96,6 +128,7 @@ export default Vue.extend({
 #landing-upper-video {
   width: 100%;
   position: absolute;
+  filter: brightness(0.4);
   object-fit: fill;
 }
 </style>

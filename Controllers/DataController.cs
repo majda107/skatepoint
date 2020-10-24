@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using skolu_nepobiram.Database;
 using skolu_nepobiram.Database.Models;
+using skolu_nepobiram.Models;
 
 namespace skolu_nepobiram.Controllers
 {
@@ -19,6 +21,20 @@ namespace skolu_nepobiram.Controllers
         public DataController(DatabaseContext db)
         {
             this._db = db;
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetStatistics()
+        {
+            return new JsonResult(new StatisticsModel()
+            {
+                SpotCount = this._db.SkatePlaces.Count(),
+                PlaceCount = this._db.KnownPlaces.Count(),
+                UserCount = this._db.Users.Count(),
+                // LikeCount = this._db.SkatePlaces.Include(p => p.Liked).Sum(t => t.Liked.Count())
+                LikeCount = 0
+            });
         }
 
         [HttpPost]
@@ -67,6 +83,39 @@ namespace skolu_nepobiram.Controllers
                 // return new JsonResult(names);
                 return Ok();
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoadTownsXML()
+        {
+            var xml = new XmlDocument();
+            using (FileStream fs = new FileStream("towns.xml", FileMode.Open))
+            {
+                xml.Load(fs);
+
+                var root = xml.DocumentElement;
+                foreach (XmlNode node in root.ChildNodes)
+                {
+                    var name = node?["name"]?.InnerText ?? "";
+                    if (name == "") continue;
+
+                    this._db.KnownPlaces.Add(new KnownPlace()
+                    {
+                        Type = "Town",
+                        Name = name,
+                        Location = node?["region"].InnerText ?? ""
+                    });
+                }
+
+                // return new JsonResult(new
+                // {
+                //     name = root.FirstChild?["name"].InnerText,
+                //     region = root.FirstChild?["region"].InnerText
+                // });
+                await this._db.SaveChangesAsync();
+            }
+
+            return Ok();
         }
 
 

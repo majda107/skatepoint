@@ -5,35 +5,106 @@
       <h3 class="doc-header">Jednoduchost</h3>
       <div class="doc-about">Zanecháváme naše API jednodhé a otevřené.</div>
       <pre class="doc-code">
-https://skatespots.cz/hackathon
+[GET] https://skatepoint.cz/hackathon
 
 -> Hackathon 2020. Tým Nepobírám.</pre
       >
     </div>
     <div class="doc">
-      <h3 class="doc-header">Hello World</h3>
+      <h3 class="doc-header">Endpointy</h3>
       <div class="doc-about">
-        Let's start by testing our setup. Open up a command prompt and enter the
-        following command:
+        Pro naše API poskytujeme jeden český endpoint.
       </div>
       <pre class="doc-code">
-curl https://api.github.com/zen
-Keep it logically awesome.</pre
+https://skatepoint.cz/
+</pre
       >
     </div>
     <div class="doc">
-      <h3 class="doc-header">Hello World</h3>
+      <h3 class="doc-header">Přihlášení</h3>
       <div class="doc-about">
-        Let's start by testing our setup. Open up a command prompt and enter the
-        following command:
-      </div>
-      <div class="doc-about">
-        Let's start by testing our setup. Open up a command prompt and enter the
-        following command:
+        Přihlášení probíha přes klasický OAuth2.0 flow a Bearer tokeny.
       </div>
       <pre class="doc-code">
-curl https://api.github.com/zen
-Keep it logically awesome.</pre
+[POST] https://skatepoint.cz/auth/login { username: USERNAME, password PASSWORD}
+
+-> { token: string, username: string }</pre
+      >
+    </div>
+
+    <div class="doc">
+      <h3 class="doc-header">Registrace</h3>
+      <div class="doc-about">
+        Registrace probíha přes klasický OAuth2.0 flow a Bearer tokeny.
+      </div>
+      <pre class="doc-code">
+[POST] https://skatepoint.cz/auth/register { username: USERNAME, email: EMAIL, password PASSWORD  }
+
+-> { token: string, username: string }</pre
+      >
+    </div>
+
+    <div class="doc">
+      <h3 class="doc-header">Získání bodů</h3>
+      <div class="doc-about">
+        Všechny aktuální body lze získat jednoduchým GET dotazem.
+      </div>
+      <pre class="doc-code">
+[GET] https://skatepoint.cz/skate/getpoints
+
+-> { 
+  id: number, 
+  name: string, 
+  lat: number, 
+  lng: number, 
+  description: string, 
+  type: string, 
+  image: string, 
+  liked: string[] 
+}</pre
+      >
+    </div>
+
+    <div class="doc">
+      <h3 class="doc-header">Významná místa [OPENDATA]</h3>
+      <div class="doc-about">Vyhledávání z kolekce významných míst.</div>
+      <pre class="doc-code">
+[GET] https://skatepoint.cz/skate/getknownplaces?name=NAME
+
+-> [ 
+  {
+    id: number, 
+    name: string, 
+    location: string,
+    type: string
+  }, ...
+]</pre
+      >
+    </div>
+
+    <hr />
+
+    <div class="doc">
+      <h3 class="doc-header">Přidání bodu [Autorizované]</h3>
+      <div class="doc-about">
+        Přidání bodu do otevřené skatepoint databáze. Pro přidání bodu musíte
+        poslat Bearer token vašeho účtu.
+      </div>
+      <pre class="doc-code">
+[POST] https://skatepoint.cz/skate/addpoint 
+
+ - Data { name: string, lat: number, lng: number, description: string, type: string }
+ - Headers { Authorization: `Bearer $TOKEN` }
+
+
+-> [ 
+  {
+    id: number, 
+    name: string, 
+    location: string,
+    type: string
+  }, ...
+]</pre
       >
     </div>
   </div>
@@ -46,4 +117,13 @@ export default Vue.extend({});
 
 <style lang="scss" scoped>
 @import "../../styles/main.scss";
+
+.doc {
+  margin: 38px 0;
+}
+
+hr {
+  opacity: 0.4;
+  margin: 56px 0;
+}
 </style>

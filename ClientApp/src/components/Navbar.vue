@@ -82,6 +82,11 @@ export default Vue.extend({
       this.setEmpty();
     },
   },
+  watch: {
+    $route(to, from) {
+      this.isMobileOpened = false;
+    },
+  },
 });
 </script>
 

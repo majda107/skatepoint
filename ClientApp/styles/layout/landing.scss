@@ -4,7 +4,8 @@
   align-items: center;
   flex-direction: column;
   .landing-upper {
-    height: 380px;
+    height: 400px;
+    // height: calc((100vh - #{$nav_height})/2);
     display: flex;
     justify-content: center;
     align-items: center;
